@@ -1,0 +1,9 @@
+@font-face {
+  font-family: 'Roobert';
+  src: url('./RoobertTRIALVF.woff2') format('woff2'),
+    url('./RoobertTRIALVF.woff') format('woff'),
+    url('./RoobertTRIALVF.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
