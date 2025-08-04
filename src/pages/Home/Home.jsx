@@ -1,26 +1,123 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Home.css";
+import { IoTriangle } from "react-icons/io5";
 
 import Navbar from "../../components/Navbar/Navbar";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+
+let rightBorder;
+let rightContent;
+let leftBorder;
+let leftContent;
+let subtitle;
+let title;
+let left_button;
+let right_button;
+let left_button_outline;
+let right_button_outline;
 
 const Home = () => {
+  useEffect(() => {
+    rightBorder = document.querySelector(".landing__right--border");
+    rightContent = document.querySelector(".landing__right--content");
+    leftBorder = document.querySelector(".landing__left--border");
+    leftContent = document.querySelector(".landing__left--content");
+    subtitle = document.querySelector(".landing__title--secondary");
+    title = document.querySelector(".landing__title");
+    left_button = document.querySelector(".landing__btn--left");
+    right_button = document.querySelector(".landing__btn--right");
+    left_button_outline = document.querySelector(
+      ".landing__btn--outline--left",
+    );
+    right_button_outline = document.querySelector(
+      ".landing__btn--outline--right",
+    );
+  }, []);
+
+  // TODO: Tweak animations to be closer to source material using delay and duration
+
+  // Left side hover animation
+  useGSAP(() => {
+    const tlLeft = gsap.timeline({ paused: true });
+    tlLeft
+      .to(rightBorder, { opacity: 0 })
+      .to(rightContent, { opacity: 0 }, "<")
+      .to(subtitle, { xPercent: 33 }, "<")
+      .to(title, { xPercent: 30 }, "<")
+      .to(left_button, { scale: 1.1, marginRight: "16px" }, "<")
+      .to(
+        left_button_outline,
+        {
+          border: "1px dashed #A0A4AB",
+          outlineOffset: "5px",
+        },
+        "<",
+      );
+
+    const handleMouseEnterLeft = () => tlLeft.play();
+    const handleMouseLeaveLeft = () => tlLeft.reverse();
+
+    if (leftContent) {
+      leftContent.addEventListener("mouseenter", handleMouseEnterLeft);
+      leftContent.addEventListener("mouseleave", handleMouseLeaveLeft);
+    }
+  });
+
+  // Right side hover animation
+  useGSAP(() => {
+    const tlRight = gsap.timeline({ paused: true });
+    tlRight
+      .to(leftBorder, { opacity: 0 })
+      .to(leftContent, { opacity: 0 }, "<")
+      .to(subtitle, { xPercent: -33 }, "<")
+      .to(title, { xPercent: -33 }, "<")
+      .to(right_button, { scale: 1.1, marginLeft: "16px" }, "<")
+      .to(
+        right_button_outline,
+        {
+          border: "1px dashed #A0A4AB",
+          outlineOffset: "5px",
+        },
+        "<",
+      );
+
+    const handleMouseEnterRight = () => tlRight.play();
+
+    const handleMouseLeaveRight = () => tlRight.reverse();
+
+    if (rightContent) {
+      rightContent.addEventListener("mouseenter", handleMouseEnterRight);
+      rightContent.addEventListener("mouseleave", handleMouseLeaveRight);
+    }
+  });
+
   return (
     <div id="landing">
       <Navbar />
 
       <div className="landing__container">
         <div className="landing__sides">
-          <h1 className="landing__title">Sophisticated{<br />}skincare</h1>
           <div className="landing__left--border" />
-          <div className="landing__left--content">
-            <img src="/left-arrow.svg" alt="" />
+          <button className="landing__left--content">
+            <div className="landing__btn landing__btn--left">
+              <div className="landing__btn--outline landing__btn--outline--left" />
+              <IoTriangle />
+            </div>
             <p className="landing__sides--text">DISCOVER A.I.</p>
-          </div>
+          </button>
+          <h1 className="landing__title">
+            Sophisticated{" "}
+            <span className="landing__title--secondary">skincare</span>
+          </h1>
           <div className="landing__right--border" />
-          <div className="landing__right--content">
+          <button className="landing__right--content">
             <p className="landing__sides--text">TAKE TEST</p>
-            <img src="/right-arrow.svg" alt="" />
-          </div>
+            <div className="landing__btn landing__btn--right">
+              <div className="landing__btn--outline landing__btn--outline--right" />
+              <IoTriangle />
+            </div>
+          </button>
           <div className="landing__info--container">
             <p className="landing__info">
               Skinstric developed an A.I. that creates a<br />
@@ -28,10 +125,10 @@ const Home = () => {
               <br />
               what your skin needs.
             </p>
-            <div className="landing__content">
+            <button className="landing__content">
               <p className="landing__sides--text">ENTER EXPERIENCE</p>
               <img src="/right-arrow.svg" alt="" />
-            </div>
+            </button>
           </div>
         </div>
       </div>
