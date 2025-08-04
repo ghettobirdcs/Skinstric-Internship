@@ -41,7 +41,28 @@ const Home = () => {
   useGSAP(() => {
     const tlLeft = gsap.timeline({ paused: true });
     tlLeft
-      .to(rightBorder, { opacity: 0 })
+      // TODO: GSAP cannot directly animate pseudo elements, convert pseudo elements to real elements
+      .to(leftBorder, {
+        "--x-before": "5px",
+        "--y-before": "5px",
+        "--opacity-before": 0.8,
+      })
+      .to(
+        leftBorder,
+        {
+          "--x-after": "10px",
+          "--y-after": "10px",
+          "--opacity-after": 0.7,
+        },
+        "<",
+      )
+      .to(
+        rightBorder,
+        {
+          opacity: 0,
+        },
+        "<",
+      )
       .to(rightContent, { opacity: 0 }, "<")
       .to(subtitle, { xPercent: 33 }, "<")
       .to(title, { xPercent: 30 }, "<")
@@ -62,13 +83,28 @@ const Home = () => {
       leftContent.addEventListener("mouseenter", handleMouseEnterLeft);
       leftContent.addEventListener("mouseleave", handleMouseLeaveLeft);
     }
-  });
+  }, [leftBorder]);
 
   // Right side hover animation
   useGSAP(() => {
     const tlRight = gsap.timeline({ paused: true });
     tlRight
-      .to(leftBorder, { opacity: 0 })
+
+      .to(rightBorder, {
+        "--x-before": "5px",
+        "--y-before": "5px",
+        "--opacity-before": 0.8,
+      })
+      .to(
+        rightBorder,
+        {
+          "--x-after": "10px",
+          "--y-after": "10px",
+          "--opacity-after": 0.7,
+        },
+        "<",
+      )
+      .to(leftBorder, { opacity: 0 }, "<")
       .to(leftContent, { opacity: 0 }, "<")
       .to(subtitle, { xPercent: -33 }, "<")
       .to(title, { xPercent: -33 }, "<")
@@ -83,14 +119,13 @@ const Home = () => {
       );
 
     const handleMouseEnterRight = () => tlRight.play();
-
     const handleMouseLeaveRight = () => tlRight.reverse();
 
     if (rightContent) {
       rightContent.addEventListener("mouseenter", handleMouseEnterRight);
       rightContent.addEventListener("mouseleave", handleMouseLeaveRight);
     }
-  });
+  }, [rightBorder]);
 
   return (
     <div id="landing">
@@ -99,6 +134,7 @@ const Home = () => {
       <div className="landing__container">
         <div className="landing__sides">
           <div className="landing__left--border" />
+
           <button className="landing__left--content">
             <div className="landing__btn landing__btn--left">
               <div className="landing__btn--outline landing__btn--outline--left" />
@@ -106,11 +142,14 @@ const Home = () => {
             </div>
             <p className="landing__sides--text">DISCOVER A.I.</p>
           </button>
+
           <h1 className="landing__title">
             Sophisticated{" "}
             <span className="landing__title--secondary">skincare</span>
           </h1>
+
           <div className="landing__right--border" />
+
           <button className="landing__right--content">
             <p className="landing__sides--text">TAKE TEST</p>
             <div className="landing__btn landing__btn--right">
@@ -118,6 +157,7 @@ const Home = () => {
               <IoTriangle />
             </div>
           </button>
+
           <div className="landing__info--container">
             <p className="landing__info">
               Skinstric developed an A.I. that creates a<br />
@@ -125,9 +165,14 @@ const Home = () => {
               <br />
               what your skin needs.
             </p>
+
+            {/* TODO: Animate center landing button */}
             <button className="landing__content">
               <p className="landing__sides--text">ENTER EXPERIENCE</p>
-              <img src="/right-arrow.svg" alt="" />
+              <div className="landing__btn landing__btn--center">
+                <div className="landing__btn--outline" />
+                <IoTriangle />
+              </div>
             </button>
           </div>
         </div>

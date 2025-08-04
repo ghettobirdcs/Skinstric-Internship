@@ -19,6 +19,10 @@
 	align-items: center;
 }
 
+.navbar__text img {
+	color: #1A1B1C83;
+}
+
 .navbar__text--primary,
 .navbar__text--secondary,
 .navbar__btn {
