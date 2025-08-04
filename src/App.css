@@ -7,6 +7,14 @@
   font-family: "Inter", sans-serif;
 }
 
+html,
+body,
+#root {
+  height: calc(100vh - 76px);
+  /* subtract height of navbar */
+  overflow: hidden;
+}
+
 a {
   text-decoration: none;
   color: #1A1B1C;
