@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./Home.css";
-import { IoTriangle } from "react-icons/io5";
 
 import Navbar from "../../components/Navbar/Navbar";
-import gsap from "gsap";
+import { IoTriangle } from "react-icons/io5";
+
 import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
 let rightBorder;
 let rightBorder_2;
@@ -22,8 +23,10 @@ let left_button_outline;
 let right_button_outline;
 
 const Home = () => {
-  useEffect(() => {
+  // Acquire variables
+  useGSAP(() => {
     rightBorder = document.querySelector(".landing__right--border");
+    // NOTE: Pseudo elements such as ::before and ::after have trouble with GSAP - we will just use normal elements to animate
     rightBorder_2 = document.querySelector(
       ".landing__right--border.border__second",
     );
@@ -49,7 +52,7 @@ const Home = () => {
     right_button_outline = document.querySelector(
       ".landing__btn--outline--right",
     );
-  }, []);
+  });
 
   // Left side hover animation
   useGSAP(() => {
