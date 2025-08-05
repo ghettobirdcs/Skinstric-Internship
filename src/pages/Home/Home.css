@@ -47,6 +47,15 @@
 	margin: 32px;
 }
 
+.landing__left,
+.landing__right {
+	position: relative;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
 .landing__left--border,
 .landing__right--border {
 	position: absolute;
@@ -95,6 +104,16 @@
 	margin: 0 32px;
 	cursor: pointer;
 	gap: 16px;
+	width: 100%;
+	max-width: 148px;
+}
+
+.landing__left--content {
+	justify-content: flex-start;
+}
+
+.landing__right--content {
+	justify-content: flex-end;
 }
 
 .landing__sides--text {
