@@ -7,8 +7,12 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
 let rightBorder;
+let rightBorder_2;
+let rightBorder_3;
 let rightContent;
 let leftBorder;
+let leftBorder_2;
+let leftBorder_3;
 let leftContent;
 let subtitle;
 let title;
@@ -20,8 +24,20 @@ let right_button_outline;
 const Home = () => {
   useEffect(() => {
     rightBorder = document.querySelector(".landing__right--border");
+    rightBorder_2 = document.querySelector(
+      ".landing__right--border.border__second",
+    );
+    rightBorder_3 = document.querySelector(
+      ".landing__right--border.border__third",
+    );
     rightContent = document.querySelector(".landing__right--content");
     leftBorder = document.querySelector(".landing__left--border");
+    leftBorder_2 = document.querySelector(
+      ".landing__left--border.border__second",
+    );
+    leftBorder_3 = document.querySelector(
+      ".landing__left--border.border__third",
+    );
     leftContent = document.querySelector(".landing__left--content");
     subtitle = document.querySelector(".landing__title--secondary");
     title = document.querySelector(".landing__title");
@@ -35,24 +51,17 @@ const Home = () => {
     );
   }, []);
 
-  // TODO: Tweak animations to be closer to source material using delay and duration
-
   // Left side hover animation
   useGSAP(() => {
     const tlLeft = gsap.timeline({ paused: true });
     tlLeft
-      // TODO: GSAP cannot directly animate pseudo elements, convert pseudo elements to real elements
-      .to(leftBorder, {
-        "--x-before": "5px",
-        "--y-before": "5px",
-        "--opacity-before": 0.8,
+      .to(leftBorder_2, {
+        opacity: 0.5,
       })
       .to(
-        leftBorder,
+        leftBorder_3,
         {
-          "--x-after": "10px",
-          "--y-after": "10px",
-          "--opacity-after": 0.7,
+          opacity: 0.25,
         },
         "<",
       )
@@ -89,18 +98,13 @@ const Home = () => {
   useGSAP(() => {
     const tlRight = gsap.timeline({ paused: true });
     tlRight
-
-      .to(rightBorder, {
-        "--x-before": "5px",
-        "--y-before": "5px",
-        "--opacity-before": 0.8,
+      .to(rightBorder_2, {
+        opacity: 0.5,
       })
       .to(
-        rightBorder,
+        rightBorder_3,
         {
-          "--x-after": "10px",
-          "--y-after": "10px",
-          "--opacity-after": 0.7,
+          opacity: 0.25,
         },
         "<",
       )
@@ -134,6 +138,8 @@ const Home = () => {
       <div className="landing__container">
         <div className="landing__sides">
           <div className="landing__left--border" />
+          <div className="landing__left--border border__second" />
+          <div className="landing__left--border border__third" />
 
           <button className="landing__left--content">
             <div className="landing__btn landing__btn--left">
@@ -149,6 +155,8 @@ const Home = () => {
           </h1>
 
           <div className="landing__right--border" />
+          <div className="landing__right--border border__second" />
+          <div className="landing__right--border border__third" />
 
           <button className="landing__right--content">
             <p className="landing__sides--text">TAKE TEST</p>
