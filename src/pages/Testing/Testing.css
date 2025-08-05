@@ -45,27 +45,20 @@
 	flex-direction: column;
 }
 
-.testing__border {
+.dotted-box {
 	position: absolute;
-	width: 70%;
-	height: 70%;
-	outline: 1px dashed #A0A4AB;
-	transform: rotate(45deg);
-	opacity: 0.3;
 	z-index: 1;
 	pointer-events: none;
 }
 
-.testing__border--second {
-	width: calc(70% - 80px);
-	height: calc(70% - 80px);
+.testing__box--second {
+	transform: scale(1.1);
 	opacity: 0.6;
 }
 
-.testing__border--third {
-	width: calc(70% - 160px);
-	height: calc(70% - 160px);
-	opacity: 1;
+.testing__box--third {
+	transform: scale(1.2);
+	opacity: 0.3;
 }
 
 .testing__content--input {

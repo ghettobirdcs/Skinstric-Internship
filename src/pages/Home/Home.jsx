@@ -2,9 +2,9 @@ import React, { useRef } from "react";
 import "./Home.css";
 
 import Navbar from "../../components/Navbar/Navbar";
-import LandingLeft from "../../components/Landing/LandingLeft";
-import LandingRight from "../../components/Landing/LandingRight";
+import LandingSide from "../../components/Landing/LandingSide";
 import LandingCenter from "../../components/Landing/LandingCenter";
+
 import { useHomepageAnimations } from "../../hooks/useHomepageAnimations";
 
 const Home = () => {
@@ -16,12 +16,16 @@ const Home = () => {
       <Navbar />
       <div className="landing__container">
         <div className="landing__sides">
-          <LandingLeft />
+          <LandingSide path="#" buttonText="DISCOVER A.I." right={false} />
+
           <h1 className="landing__title">
             Sophisticated{" "}
             <span className="landing__title--secondary">skincare</span>
           </h1>
-          <LandingRight />
+
+          <LandingSide path="testing" buttonText="TAKE TEST" right={true} />
+
+          {/* Replacement for the sides - only shows on small screens */}
           <LandingCenter />
         </div>
       </div>

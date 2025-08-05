@@ -3,9 +3,17 @@ import React from "react";
 const TestingContent = ({ placeholder, value, setValue }) => {
   return (
     <div className="testing__container">
-      <div className="testing__border"></div>
-      <div className="testing__border testing__border--second"></div>
-      <div className="testing__border testing__border--third"></div>
+      <img className="dotted-box testing__box" src="/DottedBox.svg" alt="" />
+      <img
+        className="dotted-box testing__box--second"
+        src="/DottedBox.svg"
+        alt=""
+      />
+      <img
+        className="dotted-box testing__box--third"
+        src="/DottedBox.svg"
+        alt=""
+      />
       <div className="testing__content">
         <div className="testing__input--container">
           <p className="testing__content--para">click to type</p>

@@ -14,18 +14,20 @@ export const useHomepageAnimations = (scope) => {
       // Left side hover animation
       const tlLeft = gsap.timeline({ paused: true });
       tlLeft
-        .to(".left__border--2", {
+        .to(".landing__box--left--2", {
           opacity: 0.6,
+          transform: "scale(1.1)",
         })
         .to(
-          ".left__border--3",
+          ".landing__box--left--3",
           {
             opacity: 0.3,
+            transform: "scale(1.2)",
           },
           "<",
         )
         .to(
-          ".landing__right--border",
+          ".landing__box--right",
           {
             opacity: 0,
           },
@@ -47,17 +49,19 @@ export const useHomepageAnimations = (scope) => {
       // Right side hover animation
       const tlRight = gsap.timeline({ paused: true });
       tlRight
-        .to(".right__border--2", {
+        .to(".landing__box--right--2", {
           opacity: 0.6,
+          transform: "scale(1.1)",
         })
         .to(
-          ".right__border--3",
+          ".landing__box--right--3",
           {
             opacity: 0.3,
+            transform: "scale(1.2)",
           },
           "<",
         )
-        .to(".landing__left--border", { opacity: 0 }, "<")
+        .to(".landing__box--left", { opacity: 0 }, "<")
         .to(".landing__left--content", { opacity: 0 }, "<")
         .to(".landing__title--secondary", { xPercent: -33 }, "<")
         .to(".landing__title", { xPercent: -33 }, "<")

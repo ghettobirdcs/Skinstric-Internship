@@ -1,5 +1,6 @@
 import React from "react";
 import { IoTriangle } from "react-icons/io5";
+import "./Landing.css";
 
 const LandingCenter = () => {
   return (
@@ -11,7 +12,7 @@ const LandingCenter = () => {
         what your skin needs.
       </p>
 
-      {/* TODO: Animate center landing button */}
+      {/* TODO: Animate center landing button (logic for this is in useTestingAnimations) */}
       <button className="landing__content">
         <p className="landing__sides--text">ENTER EXPERIENCE</p>
         <div className="landing__btn landing__btn--center">
