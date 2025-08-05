@@ -20,14 +20,16 @@
 }
 
 .landing__title {
+	opacity: 0;
 	font-size: 128px;
 	font-weight: 300;
 	line-height: 120px;
 	position: relative;
-	width: 100%;
 	display: flex;
+	width: 100%;
 	flex-direction: column;
 	align-items: center;
+	text-align: center;
 	letter-spacing: -0.5rem;
 }
 

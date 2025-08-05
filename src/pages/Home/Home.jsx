@@ -6,6 +6,7 @@ import { IoTriangle } from "react-icons/io5";
 
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import Button from "../../components/UI/Button";
 
 let rightBorder;
 let rightBorder_2;
@@ -22,11 +23,12 @@ let right_button;
 let left_button_outline;
 let right_button_outline;
 
+// TODO: Condense this file into components
 const Home = () => {
   // Acquire variables
   useGSAP(() => {
     rightBorder = document.querySelector(".landing__right--border");
-    // NOTE: Pseudo elements such as ::before and ::after have trouble with GSAP - we will just use normal elements to animate
+    // NOTE: Pseudo elements such as ::before and ::after don't play nice with GSAP - we will use additional elements to animate instead
     rightBorder_2 = document.querySelector(
       ".landing__right--border.border__second",
     );
@@ -52,6 +54,15 @@ const Home = () => {
     right_button_outline = document.querySelector(
       ".landing__btn--outline--right",
     );
+  });
+
+  // Page load animation
+  useGSAP(() => {
+    gsap.to(title, {
+      opacity: 1,
+      duration: 1.5,
+      delay: 0.2,
+    });
   });
 
   // Left side hover animation
@@ -144,13 +155,7 @@ const Home = () => {
           <div className="landing__left--border border__second" />
           <div className="landing__left--border border__third" />
 
-          <button className="landing__left--content">
-            <div className="landing__btn landing__btn--left">
-              <div className="landing__btn--outline landing__btn--outline--left" />
-              <IoTriangle />
-            </div>
-            <p className="landing__sides--text">DISCOVER A.I.</p>
-          </button>
+          <Button path="#" text="DISCOVER A.I." right={false} />
 
           <h1 className="landing__title">
             Sophisticated{" "}
@@ -161,13 +166,7 @@ const Home = () => {
           <div className="landing__right--border border__second" />
           <div className="landing__right--border border__third" />
 
-          <button className="landing__right--content">
-            <p className="landing__sides--text">TAKE TEST</p>
-            <div className="landing__btn landing__btn--right">
-              <div className="landing__btn--outline landing__btn--outline--right" />
-              <IoTriangle />
-            </div>
-          </button>
+          <Button path="testing" text="TAKE TEST" right={true} />
 
           <div className="landing__info--container">
             <p className="landing__info">
