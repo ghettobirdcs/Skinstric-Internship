@@ -15,12 +15,12 @@ export const useHomepageAnimations = (scope) => {
       const tlLeft = gsap.timeline({ paused: true });
       tlLeft
         .to(".left__border--2", {
-          opacity: 0.5,
+          opacity: 0.6,
         })
         .to(
           ".left__border--3",
           {
-            opacity: 0.25,
+            opacity: 0.3,
           },
           "<",
         )
@@ -48,12 +48,12 @@ export const useHomepageAnimations = (scope) => {
       const tlRight = gsap.timeline({ paused: true });
       tlRight
         .to(".right__border--2", {
-          opacity: 0.5,
+          opacity: 0.6,
         })
         .to(
           ".right__border--3",
           {
-            opacity: 0.25,
+            opacity: 0.3,
           },
           "<",
         )
