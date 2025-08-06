@@ -11,69 +11,61 @@ export const useHomepageAnimations = (scope) => {
         delay: 0.2,
       });
 
-      // Left side hover animation
-      const tlLeft = gsap.timeline({ paused: true });
-      tlLeft
-        .to(".landing__box--left--2", {
-          opacity: 0.6,
-          transform: "scale(1.1)",
-        })
-        .to(
-          ".landing__box--left--3",
-          {
-            opacity: 0.3,
-            transform: "scale(1.2)",
-          },
-          "<",
-        )
-        .to(
-          ".landing__box--right",
-          {
-            opacity: 0,
-          },
-          "<",
-        )
-        .to(".landing__right--content", { opacity: 0 }, "<")
-        .to(".landing__title--secondary", { xPercent: 33 }, "<")
-        .to(".landing__title", { xPercent: 30 }, "<")
-        .to(".landing__btn--left", { scale: 1.1, marginRight: "16px" }, "<")
-        .to(
-          ".landing__btn--outline--left",
-          {
-            border: "1px dashed #A0A4AB",
-            outlineOffset: "5px",
-          },
-          "<",
-        );
+      const createHoverTimeline = (direction) => {
+        const isLeft = direction === "left";
 
-      // Right side hover animation
-      const tlRight = gsap.timeline({ paused: true });
-      tlRight
-        .to(".landing__box--right--2", {
+        const tl = gsap.timeline({ paused: true });
+        tl.to(`.landing__box--${direction}--2`, {
           opacity: 0.6,
           transform: "scale(1.1)",
         })
-        .to(
-          ".landing__box--right--3",
-          {
-            opacity: 0.3,
-            transform: "scale(1.2)",
-          },
-          "<",
-        )
-        .to(".landing__box--left", { opacity: 0 }, "<")
-        .to(".landing__left--content", { opacity: 0 }, "<")
-        .to(".landing__title--secondary", { xPercent: -33 }, "<")
-        .to(".landing__title", { xPercent: -33 }, "<")
-        .to(".landing__btn--right", { scale: 1.1, marginLeft: "16px" }, "<")
-        .to(
-          ".landing__btn--outline--right",
-          {
-            border: "1px dashed #A0A4AB",
-            outlineOffset: "5px",
-          },
-          "<",
-        );
+          .to(
+            `.landing__box--${direction}--3`,
+            {
+              opacity: 0.3,
+              transform: "scale(1.2)",
+            },
+            "<",
+          )
+          .to(
+            `.landing__box--${isLeft ? "right" : "left"}`,
+            {
+              opacity: 0,
+            },
+            "<",
+          )
+
+          .to(
+            `.landing__${isLeft ? "right" : "left"}--content`,
+            { opacity: 0 },
+            "<",
+          )
+          .to(
+            `.landing__title--secondary`,
+            { xPercent: isLeft ? 33 : -33 },
+            "<",
+          )
+          .to(`.landing__title`, { xPercent: isLeft ? 33 : -33 }, "<")
+          .to(
+            `.landing__btn--${direction}`,
+            { scale: 1.1, [isLeft ? "marginRight" : "marginLeft"]: "16px" },
+            "<",
+          )
+          .to(
+            `.landing__btn--outline--${direction}`,
+            {
+              border: "1px dashed #A0A4AB",
+              outlineOffset: "5px",
+            },
+            "<",
+          );
+
+        return tl;
+      };
+
+      // Create hover timelines using utility function above
+      const tlLeft = createHoverTimeline("left");
+      const tlRight = createHoverTimeline("right");
 
       // Hover over center (small screens)
       const tlCenter = gsap.timeline({ paused: true });

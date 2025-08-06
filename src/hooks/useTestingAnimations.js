@@ -1,7 +1,6 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
-// TODO: Combine these two animations into one
 export const useTestingAnimations = (scope) => {
   useGSAP(
     () => {

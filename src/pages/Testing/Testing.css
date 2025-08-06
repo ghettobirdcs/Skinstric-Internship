@@ -70,12 +70,12 @@
 }
 
 #testing .testing__box--second {
-	transform: scale(1.1) translate(-50%, -50%);
+	transform: rotate(3deg) scale(1.1) translate(-50%, -50%);
 	opacity: 0.6;
 }
 
 #testing .testing__box--third {
-	transform: scale(1.2) translate(-50%, -50%);
+	transform: rotate(7deg) scale(1.2) translate(-50%, -50%);
 	opacity: 0.3;
 }
 
