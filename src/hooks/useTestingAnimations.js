@@ -5,52 +5,51 @@ import gsap from "gsap";
 export const useTestingAnimations = (scope) => {
   useGSAP(
     () => {
-      // Hover over back button
-      const tlHoverOnBack = gsap.timeline({ paused: true });
-      tlHoverOnBack
-        .to(".landing__btn--left", { scale: 1.1, marginRight: "16px" }, "<")
-        .to(
-          ".landing__btn--outline--left",
-          {
-            border: "1px dashed #A0A4AB",
-            outlineOffset: "5px",
-          },
+      const ButtonHover = (
+        containerSelector,
+        btnSelector,
+        outlineSelector,
+        marginProperty,
+      ) => {
+        const container = document.querySelector(containerSelector);
+        if (!container) return;
+
+        const tl = gsap.timeline({ paused: true });
+        tl.to(btnSelector, { scale: 1.1, [marginProperty]: "16px" }, "<").to(
+          outlineSelector,
+          { border: "1px dashed #A0A4AB", outlineOffset: "5px" },
           "<",
         );
 
-      const handleMouseEnterLeft = () => tlHoverOnBack.play();
-      const handleMouseLeaveLeft = () => tlHoverOnBack.reverse();
+        const handleMouseEnter = () => tl.play();
+        const handleMouseLeave = () => tl.reverse();
 
-      const leftSide = document.querySelector(".landing__left--content");
+        container.addEventListener("mouseenter", handleMouseEnter);
+        container.addEventListener("mouseleave", handleMouseLeave);
 
-      leftSide.addEventListener("mouseenter", handleMouseEnterLeft);
-      leftSide.addEventListener("mouseleave", handleMouseLeaveLeft);
+        return () => {
+          container.removeEventListener("mouseenter", handleMouseEnter);
+          container.removeEventListener("mouseleave", handleMouseLeave);
+        };
+      };
 
-      // Hover over next button
-      // NOTE: Redundant
-      const tlHoverOnNext = gsap.timeline({ paused: true });
-      tlHoverOnNext
-        .to(".landing__btn--right", { scale: 1.1, marginLeft: "16px" }, "<")
-        .to(
-          ".landing__btn--outline--right",
-          {
-            border: "1px dashed #A0A4AB",
-            outlineOffset: "5px",
-          },
-          "<",
-        );
+      const HoverLeft = ButtonHover(
+        ".landing__left--content",
+        ".landing__btn--left",
+        ".landing__btn--outline--left",
+        "marginRight",
+      );
 
-      const handleMouseEnterRight = () => tlHoverOnNext.play();
-      const handleMouseLeaveRight = () => tlHoverOnNext.reverse();
-
-      const rightSide = document.querySelector(".landing__right--content");
-
-      rightSide.addEventListener("mouseenter", handleMouseEnterRight);
-      rightSide.addEventListener("mouseleave", handleMouseLeaveRight);
+      const HoverRight = ButtonHover(
+        ".landing__right--content",
+        ".landing__btn--right",
+        ".landing__btn--outline--right",
+        "marginLeft",
+      );
 
       return () => {
-        rightSide.removeEventListener("mouseenter", handleMouseEnterRight);
-        rightSide.removeEventListener("mouseleave", handleMouseLeaveRight);
+        if (HoverLeft) HoverLeft();
+        if (HoverRight) HoverRight();
       };
     },
     { scope },

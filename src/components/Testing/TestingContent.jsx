@@ -1,6 +1,6 @@
 import React from "react";
 
-const TestingContent = ({ placeholder, value, setValue }) => {
+const TestingContent = ({ placeholder, value, setValue, handleKeyDown }) => {
   return (
     <>
       <div className="dotted-box__container">
@@ -18,10 +18,10 @@ const TestingContent = ({ placeholder, value, setValue }) => {
       </div>
       <div className="testing__container">
         <div className="testing__content">
-          {/* TODO: Should this be a <form>? */}
           <p className="testing__content--para">click to type</p>
           <div className="testing__input--wrapper">
-            <div className="testing__input--container">
+            {/* TODO: Find out how to make this form work with validated input */}
+            <form className="testing__input--container">
               <span className="testing__content--span">
                 {value || placeholder}
               </span>
@@ -31,10 +31,11 @@ const TestingContent = ({ placeholder, value, setValue }) => {
                 className="testing__content--input"
                 placeholder={placeholder}
                 type="text"
-                onChange={(e) => setValue(e.target.value)}
                 spellCheck={false}
+                onChange={(e) => setValue(e.target.value)}
+                onKeyDown={(e) => handleKeyDown(e)}
               />
-            </div>
+            </form>
           </div>
         </div>
       </div>
