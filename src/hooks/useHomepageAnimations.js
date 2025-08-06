@@ -75,20 +75,29 @@ export const useHomepageAnimations = (scope) => {
           "<",
         );
 
+      // Hover over center (small screens)
+      const tlCenter = gsap.timeline({ paused: true });
+      tlCenter.to(".landing__content", { scale: 1.1 });
+
       // Event handlers
       const handleMouseEnterLeft = () => tlLeft.play();
       const handleMouseLeaveLeft = () => tlLeft.reverse();
       const handleMouseEnterRight = () => tlRight.play();
       const handleMouseLeaveRight = () => tlRight.reverse();
+      const handleMouseEnterCenter = () => tlCenter.play();
+      const handleMouseLeaveCenter = () => tlCenter.reverse();
 
       // Acquire DOM nodes to add event listeners
       const leftSide = document.querySelector(".landing__left--content");
       const rightSide = document.querySelector(".landing__right--content");
+      const center = document.querySelector(".landing__content");
 
       leftSide.addEventListener("mouseenter", handleMouseEnterLeft);
       leftSide.addEventListener("mouseleave", handleMouseLeaveLeft);
       rightSide.addEventListener("mouseenter", handleMouseEnterRight);
       rightSide.addEventListener("mouseleave", handleMouseLeaveRight);
+      center.addEventListener("mouseenter", handleMouseEnterCenter);
+      center.addEventListener("mouseleave", handleMouseLeaveCenter);
 
       // Cleanup function - removes event listeners
       return () => {
@@ -96,6 +105,8 @@ export const useHomepageAnimations = (scope) => {
         leftSide.removeEventListener("mouseleave", handleMouseLeaveLeft);
         rightSide.removeEventListener("mouseenter", handleMouseEnterRight);
         rightSide.removeEventListener("mouseleave", handleMouseLeaveRight);
+        center.removeEventListener("mouseenter", handleMouseEnterCenter);
+        center.removeEventListener("mouseleave", handleMouseLeaveCenter);
       };
     },
     { scope },

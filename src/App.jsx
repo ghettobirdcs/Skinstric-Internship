@@ -2,14 +2,18 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import "./App.css";
 import Testing from "./pages/Testing/Testing";
+import { ToastContainer } from "react-toastify";
 
-// TODO: Make the borders look more like they do in the website
+// TODO: Animate center landing button
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/testing" element={<Testing />} />
-    </Routes>
+    <>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/testing" element={<Testing />} />
+      </Routes>
+      <ToastContainer />
+    </>
   );
 }
 
