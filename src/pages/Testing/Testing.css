@@ -62,20 +62,20 @@
 	pointer-events: none;
 }
 
-#testing .dotted-box {
+#testing .testing__box {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	transform-origin: top left;
+	transform-origin: center;
 }
 
 #testing .testing__box--second {
-	transform: rotate(3deg) scale(1.1) translate(-50%, -50%);
+	transform: translate(-50%, -50%) rotate(3deg) scale(1.1);
 	opacity: 0.6;
 }
 
 #testing .testing__box--third {
-	transform: rotate(7deg) scale(1.2) translate(-50%, -50%);
+	transform: translate(-50%, -50%) rotate(7deg) scale(1.2);
 	opacity: 0.3;
 }
 

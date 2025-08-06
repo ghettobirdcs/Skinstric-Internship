@@ -46,6 +46,37 @@ export const useTestingAnimations = (scope) => {
         "marginLeft",
       );
 
+      // Idle rotating animation for dotted boxes
+      const boxesTl = gsap.timeline({ repeat: -1 });
+      boxesTl.to(".testing__box", {
+        duration: 100,
+        rotation: 360,
+        ease: "none",
+        translate: "-50%, -50%",
+      });
+
+      boxesTl.to(
+        ".testing__box--second",
+        {
+          duration: 70,
+          rotation: 360,
+          ease: "none",
+          translate: "-50%, -50%",
+        },
+        "<",
+      );
+
+      boxesTl.to(
+        ".testing__box--third",
+        {
+          duration: 40,
+          rotation: 360,
+          ease: "none",
+          translate: "-50%, -50%",
+        },
+        "<",
+      );
+
       return () => {
         if (HoverLeft) HoverLeft();
         if (HoverRight) HoverRight();
