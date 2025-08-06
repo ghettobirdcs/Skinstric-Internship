@@ -40,17 +40,14 @@
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	display: flex;
-	align-items: center;
-	justify-content: center;
 }
 
 .testing__content {
-	height: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
+	position: inherit;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: fit-content;
 }
 
 .dotted-box__container {
@@ -82,17 +79,43 @@
 	opacity: 0.3;
 }
 
-.testing__input--container {
+.testing__input--wrapper {
+	display: flex;
+	width: fit-content;
 	position: relative;
 }
 
+.testing__input--container {
+	position: relative;
+	display: flex;
+	justify-content: center;
+}
+
+.testing__content--span,
 .testing__content--input {
-	border: none;
-	text-align: center;
 	line-height: 64px;
 	font-size: 60px;
 	letter-spacing: -0.2rem;
+}
+
+.testing__content--span {
+	visibility: hidden;
+	white-space: pre;
+	position: static;
+	top: 0;
+	left: 0;
+}
+
+.testing__content--input {
+	text-align: center;
+	border: none;
 	border-bottom: 1px solid #1A1B1C;
+	display: block;
+	flex: 1;
+	width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
 }
 
 .testing__content--input:focus-visible {
@@ -108,6 +131,8 @@
 	line-height: 24px;
 	text-transform: uppercase;
 	opacity: 0.4;
+	text-align: center;
+	min-width: 100px;
 }
 
 .testing__content--input::placeholder {
