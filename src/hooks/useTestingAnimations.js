@@ -49,19 +49,19 @@ export const useTestingAnimations = (scope) => {
       // Idle rotating animation for dotted boxes
       const boxesTl = gsap.timeline({ repeat: -1 });
       boxesTl.to(".testing__box", {
+        translate: "-50%, -50%",
         duration: 100,
         rotation: 360,
         ease: "none",
-        translate: "-50%, -50%",
       });
 
       boxesTl.to(
         ".testing__box--second",
         {
+          translate: "-50%, -50%",
           duration: 70,
           rotation: 360,
           ease: "none",
-          translate: "-50%, -50%",
         },
         "<",
       );
@@ -69,10 +69,10 @@ export const useTestingAnimations = (scope) => {
       boxesTl.to(
         ".testing__box--third",
         {
+          translate: "-50%, -50%",
           duration: 40,
           rotation: 360,
           ease: "none",
-          translate: "-50%, -50%",
         },
         "<",
       );
