@@ -56,7 +56,7 @@ const Testing = () => {
           handleKeyDown={(e) => handleKeyDown(e, from)}
         />
       ) : (
-        <>End of phases</>
+        <TestingContent loading={true} />
       )}
 
       {/* NOTE: The user can press 'Escape' to navigate through the questions backwards and 'Enter' to move on */}

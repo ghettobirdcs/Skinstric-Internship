@@ -132,7 +132,8 @@
 	text-transform: uppercase;
 	opacity: 0.4;
 	text-align: center;
-	min-width: 100px;
+	width: 100%;
+	min-width: 250px;
 }
 
 .testing__content--input::placeholder {

@@ -4,7 +4,7 @@ import "./App.css";
 import Testing from "./pages/Testing/Testing";
 import { ToastContainer } from "react-toastify";
 
-// TODO: Animate center landing button
+// TODO: Focus input field after navigating to /testing
 function App() {
   return (
     <>

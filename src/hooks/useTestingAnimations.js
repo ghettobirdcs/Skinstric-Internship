@@ -49,6 +49,7 @@ export const useTestingAnimations = (scope) => {
       // Idle rotating animation for dotted boxes
       const boxesTl = gsap.timeline({ repeat: -1 });
       boxesTl.to(".testing__box", {
+        // WARN: Sometimes the translate property gets lost on reload - no idea how to fix this without breaking the animation
         translate: "-50%, -50%",
         duration: 100,
         rotation: 360,
