@@ -5,8 +5,7 @@ const TestingContent = ({
   placeholder,
   value,
   setValue,
-  handleKeyDown,
-  handleSubmit,
+  validateAndProceed,
   loading,
 }) => {
   const inputRef = useRef(null);
@@ -16,6 +15,17 @@ const TestingContent = ({
       inputRef.current.focus();
     }
   }, [loading]);
+
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") handleSubmit(event);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const inputValue = inputRef.current.value;
+    const success = validateAndProceed(inputValue);
+    if (success) setValue(inputValue);
+  };
 
   return (
     <>

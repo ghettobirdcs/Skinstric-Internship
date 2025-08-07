@@ -34,18 +34,17 @@ const Testing = () => {
   );
   const currentValue = formData[currentStep?.id] || "";
 
-  const validateAndProceed = () => {
-    // String with at least 1 character and no numbers or broken values
-    const regex = /^[A-Za-z\s]+$/;
+  const validateAndProceed = (value) => {
+    // String with at least 1 character that isn't a space; no numbers or broken values
+    const regex = /^(?=.*[A-Za-z])[A-Za-z\s]+$/;
 
-    if (regex.test(currentValue)) {
+    if (regex.test(value)) {
       setCurrentStepIndex((prevIndex) => prevIndex + 1);
+      if (currentStepIndex > 0) setLoading(true);
+      return true;
     } else {
       toast.error("Invalid input! Try again.");
-    }
-
-    if (currentStepIndex > 0) {
-      setLoading(true);
+      return false;
     }
   };
 
@@ -56,45 +55,26 @@ const Testing = () => {
     }));
   };
 
-  const handleKeyDown = (event) => {
-    if (event.key === "Enter") {
-      event.preventDefault();
-      validateAndProceed();
-    } else if (event.key === "Escape") {
-      if (currentStepIndex > 0) {
-        setCurrentStepIndex((prevIndex) => prevIndex - 1);
-      }
-    }
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-  };
-
   return (
     <div id="testing" ref={containerRef}>
       <Navbar />
       <p className="testing__header">to start analysis</p>
       <TestingBoxes />
 
-      {!loading ? (
-        <TestingContent
-          key={currentStep.id}
-          placeholder={currentStep.placeholder}
-          value={currentValue}
-          setValue={handleValueChange}
-          handleKeyDown={handleKeyDown}
-          handleSubmit={handleSubmit}
-        />
-      ) : (
-        <TestingContent loading={true} />
-      )}
+      <TestingContent
+        key={currentStep?.id}
+        placeholder={currentStep?.placeholder}
+        value={currentValue}
+        setValue={handleValueChange}
+        validateAndProceed={validateAndProceed}
+        loading={loading}
+      />
 
       {/* The back button always redirects to the homepage */}
       <Button path="" right={false} text="Back" />
 
       {!loading && (
-        <button onClick={validateAndProceed}>
+        <button onClick={() => validateAndProceed(currentValue)}>
           <Button
             path="testing"
             right={true}
