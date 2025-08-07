@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import LoadingState from "../UI/LoadingState/LoadingState";
 
 const TestingContent = ({
@@ -8,25 +8,20 @@ const TestingContent = ({
   handleKeyDown,
   loading,
 }) => {
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    if (!loading && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [loading]);
+
   const handleSubmit = (event) => {
     event.preventDefault();
   };
 
   return (
     <>
-      <div className="dotted-box__container">
-        <img className="dotted-box testing__box" src="/DottedBox.svg" alt="" />
-        <img
-          className="dotted-box testing__box testing__box--second"
-          src="/DottedBox.svg"
-          alt=""
-        />
-        <img
-          className="dotted-box testing__box testing__box--third"
-          src="/DottedBox.svg"
-          alt=""
-        />
-      </div>
       <div className="testing__container">
         <div className="testing__content">
           <p className="testing__content--para">
@@ -42,6 +37,7 @@ const TestingContent = ({
                   <LoadingState />
                 ) : (
                   <input
+                    ref={inputRef}
                     value={value}
                     name={placeholder}
                     className="testing__content--input"

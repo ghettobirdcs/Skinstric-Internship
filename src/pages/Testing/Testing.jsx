@@ -7,6 +7,7 @@ import Button from "../../components/UI/Button";
 import { useTestingAnimations } from "../../hooks/useTestingAnimations";
 import TestingContent from "../../components/Testing/TestingContent";
 import { toast } from "react-toastify";
+import TestingBoxes from "../../components/UI/TestingBoxes";
 
 const formSteps = [
   {
@@ -21,6 +22,7 @@ const formSteps = [
 
 const Testing = () => {
   const containerRef = useRef(null);
+  useTestingAnimations(containerRef);
 
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [formData, setFormData] = useState({});
@@ -31,7 +33,6 @@ const Testing = () => {
     [currentStepIndex],
   );
   const currentValue = formData[currentStep?.id] || "";
-  useTestingAnimations(containerRef, currentStepIndex);
 
   const validateAndProceed = () => {
     // String with at least 1 character and no numbers or broken values
@@ -43,7 +44,9 @@ const Testing = () => {
       toast("Invalid input! Try again.");
     }
 
-    // TODO: If current step index > some number - setLoading(true)
+    if (currentStepIndex > 0) {
+      setLoading(true);
+    }
   };
 
   const handleValueChange = (newValue) => {
@@ -67,6 +70,8 @@ const Testing = () => {
     <div id="testing" ref={containerRef}>
       <Navbar />
       <p className="testing__header">to start analysis</p>
+      <TestingBoxes />
+
       {!loading ? (
         <TestingContent
           key={currentStep.id}
