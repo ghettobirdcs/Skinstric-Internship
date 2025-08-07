@@ -8,6 +8,7 @@ import { useTestingAnimations } from "../../hooks/useTestingAnimations";
 import TestingContent from "../../components/Testing/TestingContent";
 import { toast } from "react-toastify";
 import TestingBoxes from "../../components/UI/TestingBoxes";
+import axios from "axios";
 
 const formSteps = [
   {
@@ -15,7 +16,7 @@ const formSteps = [
     placeholder: "Introduce Yourself",
   },
   {
-    id: "from",
+    id: "location",
     placeholder: "Where are you from?",
   },
 ];
@@ -40,7 +41,10 @@ const Testing = () => {
 
     if (regex.test(value)) {
       setCurrentStepIndex((prevIndex) => prevIndex + 1);
-      if (currentStepIndex > 0) setLoading(true);
+      if (currentStepIndex > 0) {
+        setLoading(true);
+        postPhaseOne();
+      }
       return true;
     } else {
       toast.error("Invalid input! Try again.");
@@ -54,6 +58,17 @@ const Testing = () => {
       [currentStep.id]: newValue,
     }));
   };
+
+  async function postPhaseOne() {
+    localStorage.setItem("Name", formData["name"]);
+    localStorage.setItem("Location", formData["location"]);
+
+    await axios.post(
+      "https://us-central1-api-skinstric-ai.cloudfunctions.net/skinstricPhaseOne",
+      formData,
+    );
+    setLoading(false);
+  }
 
   return (
     <div id="testing" ref={containerRef}>
