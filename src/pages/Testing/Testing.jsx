@@ -34,11 +34,11 @@ const Testing = () => {
   );
   const currentValue = formData[currentStep?.id] || "";
 
-  const validateAndProceed = (value) => {
+  const validateAndProceed = () => {
     // String with at least 1 character and no numbers or broken values
     const regex = /^[A-Za-z\s]+$/;
 
-    if (regex.test(value)) {
+    if (regex.test(currentValue)) {
       setCurrentStepIndex((prevIndex) => prevIndex + 1);
     } else {
       toast.error("Invalid input! Try again.");
@@ -59,7 +59,7 @@ const Testing = () => {
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
-      validateAndProceed(event.target.value);
+      validateAndProceed();
     } else if (event.key === "Escape") {
       if (currentStepIndex > 0) {
         setCurrentStepIndex((prevIndex) => prevIndex - 1);
@@ -94,7 +94,7 @@ const Testing = () => {
       <Button path="" right={false} text="Back" />
 
       {!loading && (
-        <button onClick={() => validateAndProceed(currentValue)}>
+        <button onClick={validateAndProceed}>
           <Button
             path="testing"
             right={true}
