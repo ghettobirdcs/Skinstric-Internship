@@ -1,7 +1,7 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
-export const useTestingAnimations = (scope) => {
+export const useTestingAnimations = (scope, dependencies = []) => {
   useGSAP(
     () => {
       const ButtonHover = (
@@ -84,5 +84,6 @@ export const useTestingAnimations = (scope) => {
       };
     },
     { scope },
+    dependencies,
   );
 };
