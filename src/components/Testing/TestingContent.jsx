@@ -6,6 +6,7 @@ const TestingContent = ({
   value,
   setValue,
   handleKeyDown,
+  handleSubmit,
   loading,
 }) => {
   const inputRef = useRef(null);
@@ -15,10 +16,6 @@ const TestingContent = ({
       inputRef.current.focus();
     }
   }, [loading]);
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-  };
 
   return (
     <>
