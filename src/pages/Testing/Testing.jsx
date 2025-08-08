@@ -25,6 +25,7 @@ const formSteps = [
   },
 ];
 
+// TODO: Separate components in this file
 const Testing = () => {
   const containerRef = useRef(null);
   useTestingAnimations(containerRef);
@@ -76,8 +77,7 @@ const Testing = () => {
 
   return (
     <div id="testing" ref={containerRef}>
-      <Navbar />
-      <p className="testing__header">to start analysis</p>
+      <Navbar showCode={false} startAnalysis={true} />
       <TestingBoxes />
 
       <TestingContent
@@ -102,7 +102,14 @@ const Testing = () => {
           />
         </button>
       ) : (
-        <Button path="result" right={true} text="Proceed" />
+        <button>
+          <Button
+            path="result"
+            right={true}
+            text="Proceed"
+            visible={!loading}
+          />
+        </button>
       )}
     </div>
   );

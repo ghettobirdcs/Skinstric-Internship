@@ -1,7 +1,7 @@
 import React from "react";
 import "./Navbar.css";
 
-const Navbar = () => {
+const Navbar = ({ showCode = true, startAnalysis = false }) => {
   return (
     <div className="navbar">
       <div className="navbar__text">
@@ -12,7 +12,8 @@ const Navbar = () => {
         <p className="navbar__text--secondary">intro</p>
         <img src="/bracket-right.svg" alt="" />
       </div>
-      <button className="navbar__btn">enter code</button>
+      {showCode && <button className="navbar__btn">enter code</button>}
+      {startAnalysis && <p className="testing__header">to start analysis</p>}
     </div>
   );
 };

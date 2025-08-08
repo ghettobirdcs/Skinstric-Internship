@@ -14,7 +14,8 @@
 }
 
 /* Back button */
-#testing .landing__left--content {
+#testing .landing__left--content,
+#result .landing__left--content {
 	position: absolute;
 	bottom: 32px;
 	left: 32px;
@@ -23,7 +24,8 @@
 }
 
 /* Next button */
-#testing .landing__right--content {
+#testing .landing__right--content,
+#result .landing__right--content {
 	position: absolute;
 	bottom: 32px;
 	right: 32px;
