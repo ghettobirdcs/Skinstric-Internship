@@ -130,7 +130,7 @@
 	font-size: 14px;
 	line-height: 24px;
 	text-transform: uppercase;
-	opacity: 0.4;
+	color: #1A1B1C83;
 	text-align: center;
 	width: 100%;
 	min-width: 250px;
@@ -138,4 +138,24 @@
 
 .testing__content--input::placeholder {
 	color: #1A1B1C;
+}
+
+.proceed-message {
+	height: 100%;
+	position: absolute;
+	font-size: 18px;
+	color: #1A1B1C83;
+	display: flex;
+	align-items: center;
+	top: 22px;
+}
+
+.thank-you {
+	color: #1A1B1C;
+	font-size: 24px;
+	text-transform: initial;
+	position: absolute;
+	top: 32px;
+	right: 50%;
+	translate: 50%;
 }

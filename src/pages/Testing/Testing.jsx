@@ -19,6 +19,10 @@ const formSteps = [
     id: "location",
     placeholder: "Where are you from?",
   },
+  {
+    id: "Thank you",
+    placeholder: "Proceed for the next step",
+  },
 ];
 
 const Testing = () => {
@@ -88,7 +92,7 @@ const Testing = () => {
       {/* The back button always redirects to the homepage */}
       <Button path="" right={false} text="Back" />
 
-      {!loading && (
+      {!loading && currentStep?.id !== "Thank you" ? (
         <button onClick={() => validateAndProceed(currentValue)}>
           <Button
             path="testing"
@@ -97,6 +101,8 @@ const Testing = () => {
             visible={currentValue !== ""}
           />
         </button>
+      ) : (
+        <Button path="result" right={true} text="Proceed" />
       )}
     </div>
   );

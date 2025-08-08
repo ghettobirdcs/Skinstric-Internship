@@ -31,9 +31,15 @@ const TestingContent = ({
     <>
       <div className="testing__container">
         <div className="testing__content">
-          <p className="testing__content--para">
-            {loading ? "Processing submission" : "click to type"}
-          </p>
+          <div className="testing__content--para">
+            {loading ? (
+              "Processing submission"
+            ) : placeholder === "Proceed for the next step" ? (
+              <p className="thank-you">Thank you!</p>
+            ) : (
+              "click to type"
+            )}
+          </div>
           <div className="testing__input--wrapper">
             <form onSubmit={handleSubmit}>
               <div className="testing__input--container">
@@ -43,17 +49,23 @@ const TestingContent = ({
                 {loading ? (
                   <LoadingState />
                 ) : (
-                  <input
-                    ref={inputRef}
-                    value={value}
-                    name={placeholder}
-                    className="testing__content--input"
-                    placeholder={placeholder}
-                    type="text"
-                    spellCheck={false}
-                    onChange={(e) => setValue(e.target.value)}
-                    onKeyDown={(e) => handleKeyDown(e)}
-                  />
+                  <>
+                    {placeholder === "Proceed for the next step" ? (
+                      <div className="proceed-message">{placeholder}</div>
+                    ) : (
+                      <input
+                        ref={inputRef}
+                        value={value}
+                        name={placeholder}
+                        className="testing__content--input"
+                        placeholder={placeholder}
+                        type="text"
+                        spellCheck={false}
+                        onChange={(e) => setValue(e.target.value)}
+                        onKeyDown={(e) => handleKeyDown(e)}
+                      />
+                    )}
+                  </>
                 )}
               </div>
             </form>
