@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import LoadingState from "../UI/LoadingState/LoadingState";
 
 const TestingContent = ({
+  loadingMessage = "Processing submission",
   placeholder,
   value,
   setValue,
@@ -30,10 +31,12 @@ const TestingContent = ({
   return (
     <>
       <div className="testing__container">
-        <div className="testing__content">
+        <div
+          className={`testing__content ${loading && "testing__content--loading"}`}
+        >
           <div className="testing__content--para">
             {loading ? (
-              "Processing submission"
+              loadingMessage
             ) : placeholder === "Proceed for the next step" ? (
               <p className="thank-you">Thank you!</p>
             ) : (

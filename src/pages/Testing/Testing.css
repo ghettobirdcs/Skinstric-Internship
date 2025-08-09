@@ -52,6 +52,10 @@
 	width: fit-content;
 }
 
+.testing__content--loading {
+	top: 55%;
+}
+
 .dotted-box__container {
 	width: 100%;
 	height: 100%;
@@ -71,15 +75,23 @@
 	transform-origin: center;
 }
 
-#testing .testing__box--second,
-#result .testing__box--second {
+#testing .testing__box--second {
 	transform: translate(-50%, -50%) rotate(3deg) scale(1.1);
 	opacity: 0.6;
 }
 
-#testing .testing__box--third,
-#result .testing__box--third {
+#testing .testing__box--third {
 	transform: translate(-50%, -50%) rotate(7deg) scale(1.2);
+	opacity: 0.3;
+}
+
+#result .testing__box--second {
+	transform: rotate(3deg) scale(1.1);
+	opacity: 0.6;
+}
+
+#result .testing__box--third {
+	transform: rotate(7deg) scale(1.2);
 	opacity: 0.3;
 }
 
