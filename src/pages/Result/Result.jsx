@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import ResultSide from "../../components/Result/ResultSide";
 import TestingContent from "../../components/Testing/TestingContent";
@@ -13,11 +13,19 @@ const Result = () => {
   const containerRef = useRef(null);
   const leftImageInputRef = useRef(null);
   const rightImageInputRef = useRef(null);
+
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState({});
 
   // Use the same button hover animations from the testing page
   useTestingAnimations(containerRef);
+
+  useEffect(() => {
+    if (result !== null) {
+      console.log("Result has changed: ", result);
+    }
+    // TODO: Navigate to /select
+  }, [result]);
 
   const handleImageChange = (event) => {
     setLoading(true);
@@ -40,16 +48,20 @@ const Result = () => {
       { image: base64Image },
     );
     setResult(data.data);
-
-    // setLoading(false);
+    setLoading(false);
   }
 
   return (
     <div id="result" ref={containerRef}>
+      {/* NOTE: Boxes cannot be rendered conditionally with GSAP anims */}
+      <TestingBoxes
+        className={`${loading && "dotted-boxes__loading"}`}
+        style={{ opacity: loading ? 1 : 0 }}
+      />
+
       {loading ? (
         <>
           {/* We can re use the testing loading components */}
-          <TestingBoxes />
           <TestingContent
             loading={true}
             loadingMessage="PREPARING YOUR ANALYSIS..."

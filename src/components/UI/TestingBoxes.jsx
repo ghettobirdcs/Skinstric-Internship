@@ -1,8 +1,8 @@
 import React from "react";
 
-const TestingBoxes = () => {
+const TestingBoxes = (props) => {
   return (
-    <div className="dotted-box__container">
+    <div className="dotted-box__container" {...props}>
       <img className="dotted-box testing__box" src="/DottedBox.svg" alt="" />
       <img
         className="dotted-box testing__box testing__box--second"
