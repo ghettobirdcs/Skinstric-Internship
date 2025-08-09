@@ -1,0 +1,78 @@
+#result {
+	width: 100%;
+	height: 100%;
+}
+
+.content__container {
+	height: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+
+.content__left,
+.content__right {
+	width: 100%;
+	height: 50%;
+	margin: auto 0;
+	position: relative;
+}
+
+#result .dotted-box__container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#result .dotted-box {
+	scale: 0.65;
+}
+
+.result__icon--container {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.result__icon {
+	position: relative;
+	cursor: pointer;
+	transition: all 300ms ease;
+}
+
+.result__icon:hover {
+	transform: scale(1.1);
+}
+
+.result__line {
+	position: absolute;
+}
+
+.camera__line {
+	right: -25%;
+	top: -25%;
+}
+
+.gallery__line {
+	right: 79%;
+	top: 79%;
+}
+
+.result__icon--text {
+	position: absolute;
+	text-transform: uppercase;
+	width: 200px;
+	font-size: 14px;
+	line-height: 24px;
+}
+
+.camera__text {
+	top: -42%;
+	right: -180%;
+}
+
+.gallery__text {
+	text-align: right;
+	bottom: -38%;
+	left: -180%;
+}
