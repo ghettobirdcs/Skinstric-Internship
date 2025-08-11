@@ -31,14 +31,18 @@
 }
 
 .select__content--box {
+	cursor: not-allowed;
 	position: absolute;
 	background-color: #F3F3F4;
 	rotate: 45deg;
-	pointer-events: none;
 	width: 150px;
 	height: 150px;
 	rotate: 45deg;
 	z-index: -1;
+}
+
+.allowed {
+	cursor: pointer;
 }
 
 .select__content--top .select__content--box {
@@ -49,6 +53,7 @@
 	width: 100%;
 	text-align: center;
 	text-transform: uppercase;
+	pointer-events: none;
 }
 
 .select__content--top {

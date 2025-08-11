@@ -19,7 +19,7 @@ const Select = () => {
         <div className="select__content--wrapper">
           <div className="select__content select__content--top">
             <p className="select__content--para">Demographics</p>
-            <div className="select__content--box" />
+            <div className="select__content--box allowed" />
           </div>
           <div className="select__content select__content--right">
             <p className="select__content--para">Cosmetic Concerns</p>
