@@ -1,10 +1,16 @@
 import { Route, Routes } from "react-router-dom";
-import Home from "./pages/Home/Home";
 import "./App.css";
-import Testing from "./pages/Testing/Testing";
-import { ToastContainer } from "react-toastify";
-import Result from "./pages/Result/Result";
 
+import Home from "./pages/Home/Home";
+import Testing from "./pages/Testing/Testing";
+import Result from "./pages/Result/Result";
+import Select from "./pages/Select/Select";
+
+import { ToastContainer } from "react-toastify";
+
+// TODO: /testing responsiveness
+// TODO: /result responsiveness
+// TODO: /select responsiveness
 function App() {
   return (
     <>
@@ -12,6 +18,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/testing" element={<Testing />} />
         <Route path="/result" element={<Result />} />
+        <Route path="/select" element={<Select />} />
       </Routes>
       <ToastContainer />
     </>

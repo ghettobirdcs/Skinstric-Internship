@@ -1,7 +1,11 @@
 import React from "react";
 import "./Navbar.css";
 
-const Navbar = ({ showCode = true, startAnalysis = false }) => {
+const Navbar = ({
+  showCode = true,
+  startAnalysis = false,
+  editAnalysis = false,
+}) => {
   return (
     <div className="navbar">
       <div className="navbar__text">
@@ -14,6 +18,16 @@ const Navbar = ({ showCode = true, startAnalysis = false }) => {
       </div>
       {showCode && <button className="navbar__btn">enter code</button>}
       {startAnalysis && <p className="testing__header">to start analysis</p>}
+      {editAnalysis && (
+        <>
+          <p className="testing__header">A.I. Analysis</p>
+          <p className="testing__header testing__header--secondary">
+            a.i. has estimated the following.
+            <br />
+            fix estimated information if needed.
+          </p>
+        </>
+      )}
     </div>
   );
 };

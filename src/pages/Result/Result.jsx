@@ -1,55 +1,45 @@
-import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { usePhaseTwo } from "../../hooks/usePhaseTwo";
+
 import Navbar from "../../components/Navbar/Navbar";
 import ResultSide from "../../components/Result/ResultSide";
 import TestingContent from "../../components/Testing/TestingContent";
-import Button from "../../components/UI/Button";
 import TestingBoxes from "../../components/UI/TestingBoxes";
-import { useTestingAnimations } from "../../hooks/useTestingAnimations";
+import Button from "../../components/UI/Button";
+
+import { useDottedBoxAnimations } from "../../hooks/useDottedBoxAnimations";
+import { useButtonHoverAnimations } from "../../hooks/useButtonHoverAnimations";
 
 import "./Result.css";
+import { toast } from "react-toastify";
 
 const Result = () => {
+  const navigate = useNavigate();
+
   const containerRef = useRef(null);
   const leftImageInputRef = useRef(null);
   const rightImageInputRef = useRef(null);
 
-  const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState({});
+  const { loading, submitPhaseTwo } = usePhaseTwo();
 
-  // Use the same button hover animations from the testing page
-  useTestingAnimations(containerRef);
-
-  useEffect(() => {
-    if (result !== null) {
-      console.log("Result has changed: ", result);
-    }
-    // TODO: Navigate to /select
-  }, [result]);
+  useDottedBoxAnimations(containerRef);
+  useButtonHoverAnimations(containerRef);
 
   const handleImageChange = (event) => {
-    setLoading(true);
-
     const image = event.target.files[0];
     if (!image) return;
 
     const reader = new FileReader();
     reader.onloadend = async () => {
       const base64Image = reader.result;
-      // Post base64 encoded string to phase 2 API
-      await postPhaseTwo(base64Image);
+      submitPhaseTwo(base64Image).catch(() => {
+        toast.error("Something went wrong!");
+      });
+      navigate("/select");
     };
     reader.readAsDataURL(image);
   };
-
-  async function postPhaseTwo(base64Image) {
-    const { data } = await axios.post(
-      "https://us-central1-api-skinstric-ai.cloudfunctions.net/skinstricPhaseTwo",
-      { image: base64Image },
-    );
-    setResult(data.data);
-    setLoading(false);
-  }
 
   return (
     <div id="result" ref={containerRef}>

@@ -2,13 +2,15 @@ import React, { useMemo, useRef, useState } from "react";
 import "./Testing.css";
 
 import Navbar from "../../components/Navbar/Navbar";
-import Button from "../../components/UI/Button";
-
-import { useTestingAnimations } from "../../hooks/useTestingAnimations";
-import TestingContent from "../../components/Testing/TestingContent";
-import { toast } from "react-toastify";
 import TestingBoxes from "../../components/UI/TestingBoxes";
-import axios from "axios";
+import TestingContent from "../../components/Testing/TestingContent";
+import TestingNavigation from "../../components/Testing/TestingNavigation";
+
+import { useButtonHoverAnimations } from "../../hooks/useButtonHoverAnimations";
+import { useDottedBoxAnimations } from "../../hooks/useDottedBoxAnimations";
+
+import { toast } from "react-toastify";
+import { usePhaseOne } from "../../hooks/usePhaseOne";
 
 const formSteps = [
   {
@@ -25,14 +27,15 @@ const formSteps = [
   },
 ];
 
-// TODO: Separate components in this file
 const Testing = () => {
   const containerRef = useRef(null);
-  useTestingAnimations(containerRef);
+  useButtonHoverAnimations(containerRef);
+  useDottedBoxAnimations(containerRef);
 
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [formData, setFormData] = useState({});
-  const [loading, setLoading] = useState(false);
+
+  const { loading, submitPhaseOne } = usePhaseOne();
 
   const currentStep = useMemo(
     () => formSteps[currentStepIndex],
@@ -47,8 +50,9 @@ const Testing = () => {
     if (regex.test(value)) {
       setCurrentStepIndex((prevIndex) => prevIndex + 1);
       if (currentStepIndex > 0) {
-        setLoading(true);
-        postPhaseOne();
+        submitPhaseOne(formData).catch(() => {
+          toast.error("Something went wrong!");
+        });
       }
       return true;
     } else {
@@ -64,17 +68,6 @@ const Testing = () => {
     }));
   };
 
-  async function postPhaseOne() {
-    localStorage.setItem("Name", formData["name"]);
-    localStorage.setItem("Location", formData["location"]);
-
-    await axios.post(
-      "https://us-central1-api-skinstric-ai.cloudfunctions.net/skinstricPhaseOne",
-      formData,
-    );
-    setLoading(false);
-  }
-
   return (
     <div id="testing" ref={containerRef}>
       <Navbar showCode={false} startAnalysis={true} />
@@ -89,28 +82,12 @@ const Testing = () => {
         loading={loading}
       />
 
-      {/* The back button always redirects to the homepage */}
-      <Button path="" right={false} text="Back" />
-
-      {!loading && currentStep?.id !== "Thank you" ? (
-        <button onClick={() => validateAndProceed(currentValue)}>
-          <Button
-            path="testing"
-            right={true}
-            text="Next"
-            visible={currentValue !== ""}
-          />
-        </button>
-      ) : (
-        <button>
-          <Button
-            path="result"
-            right={true}
-            text="Proceed"
-            visible={!loading}
-          />
-        </button>
-      )}
+      <TestingNavigation
+        onNext={() => validateAndProceed(currentValue)}
+        loading={loading}
+        currentValue={currentValue}
+        showThankYou={currentStep?.id === "Thank you"}
+      />
     </div>
   );
 };
