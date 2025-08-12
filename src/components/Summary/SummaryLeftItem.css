@@ -1,0 +1,10 @@
+.selector {
+	width: 208px;
+	height: 104px;
+	margin-left: 32px;
+}
+
+.selector__first {
+	color: #fff;
+	background-color: #1A1B1C;
+}
