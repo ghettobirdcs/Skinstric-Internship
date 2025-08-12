@@ -32,7 +32,7 @@ const SelectBoxes = ({ hoveredSide }) => {
     if (!hoveredSide) {
       gsap.to(animBoxRef.current, {
         opacity: 0,
-        scale: 0.6,
+        scale: 1,
         duration: 0.4,
         ease: "power1.out",
         overwrite: "auto",

@@ -5,6 +5,7 @@ const Navbar = ({
   showCode = true,
   startAnalysis = false,
   editAnalysis = false,
+  demographics = false,
 }) => {
   return (
     <div className="navbar">
@@ -25,6 +26,15 @@ const Navbar = ({
             a.i. has estimated the following.
             <br />
             fix estimated information if needed.
+          </p>
+        </>
+      )}
+      {demographics && (
+        <>
+          <p className="testing__header">A.I. Analysis</p>
+          <p className="testing__header summary__header--large">DEMOGRAPHICS</p>
+          <p className="testing__header summary__header--secondary">
+            PREDICTED RACE &amp; AGE
           </p>
         </>
       )}

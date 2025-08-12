@@ -38,6 +38,7 @@ const Select = () => {
               side={side}
               onHover={() => setHoveredSide(side)}
               onUnHover={() => setHoveredSide(null)}
+              path={side === "top" ? "summary" : ""}
             />
           ))}
         </div>

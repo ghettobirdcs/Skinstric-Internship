@@ -25,6 +25,7 @@ button {
 /* Back button */
 #testing .landing__left--content,
 #result .landing__left--content,
+#summary .landing__left--content,
 #select .landing__left--content {
   position: absolute;
   bottom: 32px;
@@ -36,6 +37,7 @@ button {
 /* Next button */
 #testing .landing__right--content,
 #result .landing__right--content,
+#summary .landing__right--content,
 #select .landing__right--content {
   position: absolute;
   bottom: 32px;

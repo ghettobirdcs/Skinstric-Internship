@@ -1,0 +1,28 @@
+#summary {
+	width: 100%;
+	height: 100%;
+}
+
+.summary__header--large {
+	top: 115px;
+	left: 29px;
+	font-size: 72px;
+	font-weight: 400;
+	height: 64px;
+	line-height: 64px;
+}
+
+.summary__header--secondary {
+	top: 190px;
+	font-weight: 400;
+	font-size: 14px;
+}
+
+.summary__info {
+	position: absolute;
+	bottom: 32px;
+	left: 50%;
+	transform: translateX(-50%);
+	font-weight: 400;
+	color: #A0A4AB;
+}
