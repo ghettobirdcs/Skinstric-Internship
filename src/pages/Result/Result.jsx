@@ -1,6 +1,5 @@
 import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { usePhaseTwo } from "../../hooks/usePhaseTwo";
 
 import Navbar from "../../components/Navbar/Navbar";
 import ResultSide from "../../components/Result/ResultSide";
@@ -8,6 +7,7 @@ import TestingContent from "../../components/Testing/TestingContent";
 import TestingBoxes from "../../components/UI/TestingBoxes";
 import Button from "../../components/UI/Button";
 
+import { usePhaseTwo } from "../../hooks/usePhases";
 import { useDottedBoxAnimations } from "../../hooks/useDottedBoxAnimations";
 import { useButtonHoverAnimations } from "../../hooks/useButtonHoverAnimations";
 

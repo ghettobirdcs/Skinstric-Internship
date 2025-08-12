@@ -1,14 +1,18 @@
 import React, { useRef } from "react";
 import "./Select.css";
 
-import Navbar from "../../components/Navbar/Navbar";
 import Button from "../../components/UI/Button";
+import Navbar from "../../components/Navbar/Navbar";
 import TestingBoxes from "../../components/UI/TestingBoxes";
+import SelectItem from "../../components/Select/SelectItem";
+
 import { useButtonHoverAnimations } from "../../hooks/useButtonHoverAnimations";
+import { useSelectAnimations } from "../../hooks/useSelectAnimations";
 
 const Select = () => {
   const containerRef = useRef(null);
   useButtonHoverAnimations(containerRef);
+  useSelectAnimations(containerRef);
 
   return (
     <div id="select" ref={containerRef}>
@@ -17,22 +21,10 @@ const Select = () => {
 
       <div className="select__content--container">
         <div className="select__content--wrapper">
-          <div className="select__content select__content--top">
-            <p className="select__content--para">Demographics</p>
-            <div className="select__content--box allowed" />
-          </div>
-          <div className="select__content select__content--right">
-            <p className="select__content--para">Cosmetic Concerns</p>
-            <div className="select__content--box" />
-          </div>
-          <div className="select__content select__content--bottom">
-            <p className="select__content--para">Weather</p>
-            <div className="select__content--box" />
-          </div>
-          <div className="select__content select__content--left">
-            <p className="select__content--para">Skin type details</p>
-            <div className="select__content--box" />
-          </div>
+          <SelectItem text="Demographics" side="top" />
+          <SelectItem text="Cosmetic Concerns" side="right" />
+          <SelectItem text="Weather" side="bottom" />
+          <SelectItem text="Skin type details" side="left" />
         </div>
       </div>
 

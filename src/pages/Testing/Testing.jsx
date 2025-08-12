@@ -8,9 +8,9 @@ import TestingNavigation from "../../components/Testing/TestingNavigation";
 
 import { useButtonHoverAnimations } from "../../hooks/useButtonHoverAnimations";
 import { useDottedBoxAnimations } from "../../hooks/useDottedBoxAnimations";
+import { usePhaseOne } from "../../hooks/usePhases";
 
 import { toast } from "react-toastify";
-import { usePhaseOne } from "../../hooks/usePhaseOne";
 
 const formSteps = [
   {
