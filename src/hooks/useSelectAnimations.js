@@ -15,7 +15,10 @@ export const useSelectAnimations = (scope) => {
         const side = box.getAttribute("data-side");
 
         // Animation specs
-        let animProps = { scale: 1, opacity: 1 };
+        let animProps = {
+          scale: 1,
+          opacity: 1,
+        };
         switch (side) {
           case "top":
             animProps = { scale: 1, opacity: 1 };

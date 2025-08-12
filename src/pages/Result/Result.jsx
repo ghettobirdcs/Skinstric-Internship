@@ -33,7 +33,7 @@ const Result = () => {
     const reader = new FileReader();
     reader.onloadend = async () => {
       const base64Image = reader.result;
-      submitPhaseTwo(base64Image).catch(() => {
+      await submitPhaseTwo(base64Image).catch(() => {
         toast.error("Something went wrong!");
       });
       navigate("/select");
