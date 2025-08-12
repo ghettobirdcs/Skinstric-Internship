@@ -1,9 +1,9 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import "./Select.css";
 
 import Button from "../../components/UI/Button";
 import Navbar from "../../components/Navbar/Navbar";
-import TestingBoxes from "../../components/UI/TestingBoxes";
+import SelectBoxes from "../../components/UI/SelectBoxes";
 import SelectItem from "../../components/Select/SelectItem";
 
 import { useButtonHoverAnimations } from "../../hooks/useButtonHoverAnimations";
@@ -14,17 +14,32 @@ const Select = () => {
   useButtonHoverAnimations(containerRef);
   useSelectAnimations(containerRef);
 
+  const [hoveredSide, setHoveredSide] = useState(null);
+
   return (
     <div id="select" ref={containerRef}>
       <Navbar showCode={false} editAnalysis={true} />
-      <TestingBoxes />
+      <SelectBoxes hoveredSide={hoveredSide} />
 
       <div className="select__content--container">
         <div className="select__content--wrapper">
-          <SelectItem text="Demographics" side="top" />
-          <SelectItem text="Cosmetic Concerns" side="right" />
-          <SelectItem text="Weather" side="bottom" />
-          <SelectItem text="Skin type details" side="left" />
+          {["top", "right", "bottom", "left"].map((side) => (
+            <SelectItem
+              key={side}
+              text={
+                side === "top"
+                  ? "Demographics"
+                  : side === "right"
+                    ? "Cosmetic Concerns"
+                    : side === "bottom"
+                      ? "Weather"
+                      : "Skin type details"
+              }
+              side={side}
+              onHover={() => setHoveredSide(side)}
+              onUnHover={() => setHoveredSide(null)}
+            />
+          ))}
         </div>
       </div>
 
