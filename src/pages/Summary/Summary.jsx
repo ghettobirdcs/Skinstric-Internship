@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import "./Summary.css";
 
 import Button from "../../components/UI/Button";
@@ -16,20 +16,33 @@ const Summary = () => {
   const age = useLocalStorageEstimate("Age");
   const gender = useLocalStorageEstimate("Gender");
 
-  const placeholder = (est) =>
-    est.loading
-      ? "Loading..."
-      : est.label
-        ? `${est.label} (${est.value}%)`
-        : "Unavailable";
+  const [activeIndex, setActiveIndex] = useState(1);
+
+  const placeholder = (estimate) =>
+    estimate.error ? "Unavailable" : `${estimate.label}`;
 
   return (
     <div id="summary" ref={containerRef}>
       <Navbar showCode={false} demographics={true} />
       <div className="summary__container">
-        <SummaryLeftItem index={1} value={placeholder(race)} />
-        <SummaryLeftItem index={2} value={placeholder(age)} />
-        <SummaryLeftItem index={3} value={placeholder(gender)} />
+        <SummaryLeftItem
+          index={1}
+          value={placeholder(race)}
+          active={activeIndex === 1}
+          setActiveIndex={setActiveIndex}
+        />
+        <SummaryLeftItem
+          index={2}
+          value={placeholder(age)}
+          active={activeIndex === 2}
+          setActiveIndex={setActiveIndex}
+        />
+        <SummaryLeftItem
+          index={3}
+          value={placeholder(gender)}
+          active={activeIndex === 3}
+          setActiveIndex={setActiveIndex}
+        />
         {/* TODO: Make components for content value (mid), and corrector (right) */}
         {/* TODO: Make component for 'reset' + 'confirm' btn */}
       </div>

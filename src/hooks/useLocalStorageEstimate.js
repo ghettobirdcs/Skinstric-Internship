@@ -4,8 +4,6 @@ import { getEstimate } from "../utils/getEstimate";
 export function useLocalStorageEstimate(key, { decimals = 0 } = {}) {
   const [label, setLabel] = useState("");
   const [value, setValue] = useState(null);
-  const [percentages, setPercentages] = useState({});
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -13,8 +11,7 @@ export function useLocalStorageEstimate(key, { decimals = 0 } = {}) {
     try {
       const raw = localStorage.getItem(key);
       if (!raw) {
-        if (!cancelled) setLoading(false);
-        return;
+        if (!cancelled) return;
       }
       let obj;
       try {
@@ -22,25 +19,18 @@ export function useLocalStorageEstimate(key, { decimals = 0 } = {}) {
       } catch (e) {
         if (!cancelled) {
           setError(e);
-          setLoading(false);
         }
         return;
       }
 
-      const { percentages, highestLabel, highestValue } = getEstimate(
-        obj,
-        decimals,
-      );
+      const { highestLabel, highestValue } = getEstimate(obj, decimals);
       if (!cancelled) {
         setLabel(highestLabel || "");
         setValue(highestValue);
-        setPercentages(percentages);
-        setLoading(false);
       }
     } catch (e) {
       if (!cancelled) {
         setError(e);
-        setLoading(false);
       }
     }
     return () => {
@@ -51,8 +41,6 @@ export function useLocalStorageEstimate(key, { decimals = 0 } = {}) {
   return {
     label,
     value,
-    percentages,
-    loading,
     error,
   };
 }
