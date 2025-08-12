@@ -55,8 +55,18 @@ button {
 #select .testing__box,
 #select .testing__box--second,
 #select .testing__box--third {
-  transform: scale(0.1);
-  opacity: 0;
+  transform: translate(-50%, -50%);
+  opacity: 1;
+}
+
+#select .testing__box--second {
+  transform: translate(-50%, -50%) scale(1.1);
+  opacity: 0.6;
+}
+
+#select .testing__box--third {
+  transform: translate(-50%, -50%) scale(1.2);
+  opacity: 0.3;
 }
 
 #testing .testing__box--second {

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
+import TestingBoxes from "./TestingBoxes";
 
 const scaleMap = {
   top: 1,
@@ -36,6 +37,15 @@ const SelectBoxes = ({ hoveredSide }) => {
         ease: "power1.out",
         overwrite: "auto",
       });
+      gsap.to(".testing__box", {
+        opacity: 1,
+      });
+      gsap.to(".testing__box--second", {
+        opacity: 0.6,
+      });
+      gsap.to(".testing__box--third", {
+        opacity: 0.3,
+      });
     } else {
       gsap.to(animBoxRef.current, {
         opacity: opacityMap[hoveredSide] || 1,
@@ -44,11 +54,15 @@ const SelectBoxes = ({ hoveredSide }) => {
         ease: "power1.out",
         overwrite: "auto",
       });
+      gsap.to(".testing__box", {
+        opacity: 0,
+      });
     }
   }, [hoveredSide]);
 
   return (
     <div className="dotted-box__container">
+      <TestingBoxes />
       <img
         ref={animBoxRef}
         className="dotted-box select__dotted-box"
