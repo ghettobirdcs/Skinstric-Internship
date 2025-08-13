@@ -10,9 +10,33 @@
 	justify-content: space-between;
 }
 
+.summary__half {
+	width: 100%;
+}
+
+.summary__right {
+	text-align: right;
+}
+
 .summary__para {
 	text-transform: uppercase;
 	color: #1A1B1C;
 	opacity: 80%;
 	font-weight: 500;
 }
+
+.summary__list {
+	margin-top: 16px;
+}
+
+.summary__list--item {
+	height: 48px;
+	cursor: pointer;
+	text-transform: capitalize;
+}
+
+.summary__list--item--active {
+	background-color: #1A1B1C;
+}
+
+.summary__list--values {}

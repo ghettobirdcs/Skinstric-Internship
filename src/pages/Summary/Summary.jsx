@@ -63,10 +63,12 @@ const Summary = () => {
         <SummaryContent
           type={activeType}
           title={activeEstimate.label}
-          value={activeEstimate.value}
+          value={activeEstimate.value?.toFixed(0)}
         />
-        <SummaryCorrector />
-        {/* TODO: Make component for corrector (right) */}
+        <SummaryCorrector
+          type={activeType}
+          listItem={activeEstimate.listItem}
+        />
         {/* TODO: Make component for 'reset' + 'confirm' btn */}
       </div>
       <p className="summary__info">

@@ -17,6 +17,10 @@ a {
   color: #1A1B1C;
 }
 
+li {
+  list-style: none;
+}
+
 button {
   border: none;
   background-color: #fff;
