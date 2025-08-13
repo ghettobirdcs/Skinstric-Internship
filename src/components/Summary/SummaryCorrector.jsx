@@ -32,7 +32,7 @@ const SummaryCorrector = ({
   return (
     <div className="summary__corrector">
       <ul className="summary__list">
-        <li className="summary__list--item">
+        <li className="summary__list--item summary__list--title">
           <p className="summary__para">{type}</p>
           <p className="summary__para">A.I. Confidence</p>
         </li>

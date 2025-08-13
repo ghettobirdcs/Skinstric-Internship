@@ -36,7 +36,23 @@
 	transition: all 300ms ease;
 }
 
+.summary__list--item:hover {
+	background-color: #E1E1E2;
+}
+
+.summary__list--item--active:hover {
+	background-color: #000;
+}
+
 .summary__list--item--active {
 	background-color: #1A1B1C;
 	color: #FCFCFC;
+}
+
+.summary__list--title {
+	cursor: default;
+}
+
+.summary__list--title:hover {
+	background-color: #F3F3F4;
 }
