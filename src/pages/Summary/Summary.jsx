@@ -130,6 +130,7 @@ const Summary = () => {
           type={activeType}
           listItem={activeEstimate.listItem || []}
           onCorrect={handleCorrect}
+          selectedLabel={overrides[activeType]?.label}
         />
         {/* TODO: Make component for 'reset' + 'confirm' btn */}
       </div>

@@ -1,16 +1,29 @@
 import React, { useEffect, useState } from "react";
 import "./SummaryCorrector.css";
 
-const SummaryCorrector = ({ type = "Race", listItem = [], onCorrect }) => {
-  const [activeLabel, setActiveLabel] = useState("");
+const SummaryCorrector = ({
+  type = "Race",
+  listItem = [],
+  onCorrect,
+  selectedLabel = undefined,
+}) => {
+  const controlled = selectedLabel !== undefined;
+
+  const [internalActive, setInternalActive] = useState("");
 
   useEffect(() => {
-    setActiveLabel(listItem[0]?.label || "");
-  }, [listItem]);
+    if (!controlled) {
+      setInternalActive(listItem[0]?.label || "");
+    }
+  }, [listItem, controlled]);
+
+  const activeLabel = controlled ? selectedLabel : internalActive;
 
   const handleSelect = (item) => {
     if (item.label === activeLabel) return;
-    setActiveLabel(item.label);
+    if (!controlled) {
+      setInternalActive(item.label);
+    }
     if (typeof onCorrect === "function") {
       onCorrect(type, item.label, item.value, listItem);
     }
