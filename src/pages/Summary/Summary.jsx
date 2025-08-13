@@ -21,24 +21,20 @@ const Summary = () => {
   const [activeType, setActiveType] = useState("Race");
   const [overrides, setOverrides] = useState({});
 
-  const applyOverride = (estimate, type) => {
-    const ov = overrides[type];
-    if (!ov) return estimate;
-    return { ...estimate, label: ov.label, value: ov.value };
-  };
+  const raceEffective = useMemo(() => {
+    const ov = overrides.Race;
+    return ov ? { ...race, label: ov.label, value: ov.value } : race;
+  }, [race, overrides]);
 
-  const raceEffective = useMemo(
-    () => applyOverride(race, "Race"),
-    [race, overrides],
-  );
-  const ageEffective = useMemo(
-    () => applyOverride(age, "Age"),
-    [age, overrides],
-  );
-  const genderEffective = useMemo(
-    () => applyOverride(gender, "Gender"),
-    [gender, overrides],
-  );
+  const ageEffective = useMemo(() => {
+    const ov = overrides.Age;
+    return ov ? { ...age, label: ov.label, value: ov.value } : age;
+  }, [age, overrides]);
+
+  const genderEffective = useMemo(() => {
+    const ov = overrides.Gender;
+    return ov ? { ...gender, label: ov.label, value: ov.value } : gender;
+  }, [gender, overrides]);
 
   const estimatesByType = {
     Race: raceEffective,
