@@ -3,22 +3,14 @@
 	max-width: 448px;
 	margin-left: 16px;
 	margin-right: 32px;
-	padding: 16px;
+	padding: 16px 0;
 	background-color: #F3F3F4;
 	border-top: 1px solid #1A1B1C;
 	display: flex;
 	justify-content: space-between;
 }
 
-.summary__half {
-	width: 100%;
-}
-
-.summary__right {
-	text-align: right;
-}
-
-.summary__para {
+.summary__list--item .summary__para {
 	text-transform: uppercase;
 	color: #1A1B1C;
 	opacity: 80%;
@@ -26,6 +18,7 @@
 }
 
 .summary__list {
+	width: 100%;
 	margin-top: 16px;
 }
 
@@ -37,10 +30,14 @@
 	height: 48px;
 	cursor: pointer;
 	text-transform: capitalize;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 16px;
+	transition: all 300ms ease;
 }
 
 .summary__list--item--active {
 	background-color: #1A1B1C;
+	color: #FCFCFC;
 }
-
-.summary__list--values {}
