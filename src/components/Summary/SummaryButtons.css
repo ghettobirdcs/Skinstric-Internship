@@ -1,0 +1,23 @@
+.summary__buttons {
+	position: absolute;
+	bottom: 32px;
+	right: 32px;
+}
+
+.summary__button {
+	font-size: 14px;
+	font-weight: 600;
+	text-transform: uppercase;
+	padding: 8px 16px;
+	cursor: pointer;
+}
+
+.summary__button--reset {
+	border: 1px solid #1A1B1C;
+}
+
+.summary__button--confirm {
+	margin-left: 16px;
+	color: #fff;
+	background-color: #1A1B1C;
+}

@@ -6,6 +6,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import SummaryLeftItem from "../../components/Summary/SummaryLeftItem";
 import SummaryContent from "../../components/Summary/SummaryContent";
 import SummaryCorrector from "../../components/Summary/SummaryCorrector";
+import SummaryButtons from "../../components/Summary/SummaryButtons";
 
 import { useButtonHoverAnimations } from "../../hooks/useButtonHoverAnimations";
 import { useLocalStorageEstimate } from "../../hooks/useLocalStorageEstimate";
@@ -128,12 +129,17 @@ const Summary = () => {
           onCorrect={handleCorrect}
           selectedLabel={overrides[activeType]?.label}
         />
-        {/* TODO: Make component for 'reset' + 'confirm' btn */}
       </div>
+
+      {/* BACK BUTTON - to /select */}
+      <Button path="select" text="Back" right={false} />
+
       <p className="summary__info">
         If A.I. estimate is wrong, select the correct one.
       </p>
-      <Button path="select" text="Back" right={false} />
+
+      {/* CONFIRM AND RESET BUTTONS */}
+      <SummaryButtons resetOverrides={() => setOverrides({})} />
     </div>
   );
 };
