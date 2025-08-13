@@ -43,7 +43,7 @@ const Result = () => {
 
   return (
     <div id="result" ref={containerRef}>
-      {/* NOTE: Boxes cannot be rendered conditionally with GSAP anims */}
+      {/* NOTE: Boxes cannot be rendered conditionally while being animated with GSAP */}
       <TestingBoxes
         className={`${loading && "dotted-boxes__loading"}`}
         style={{ opacity: loading ? 1 : 0 }}
@@ -51,7 +51,7 @@ const Result = () => {
 
       {loading ? (
         <>
-          {/* We can re use the testing loading components */}
+          {/* We can re use the testing content component exclusively for loading this part */}
           <TestingContent
             loading={true}
             loadingMessage="PREPARING YOUR ANALYSIS..."

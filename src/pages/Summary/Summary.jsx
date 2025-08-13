@@ -50,7 +50,7 @@ const Summary = () => {
     error: null,
   };
 
-  // NOTE: Updated demographics from user overrides
+  // NOTE: Contains both the original lists and the corrections - preserves original data
   // const demographics = useMemo(
   //   () => ({
   //     Race: {
