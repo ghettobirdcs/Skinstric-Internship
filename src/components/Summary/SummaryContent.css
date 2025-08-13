@@ -1,0 +1,51 @@
+.summary__content {
+	width: 100%;
+	margin-left: 16px;
+	border-top: 1px solid #1A1B1C;
+	background-color: #F3F3F4;
+	padding: 16px;
+	position: relative;
+}
+
+.summary__title,
+.summary__circle {
+	font-size: 40px;
+	line-height: 40px;
+}
+
+.summary__title--capitalize {
+	text-transform: capitalize;
+}
+
+.summary__title--uppercase {
+	text-transform: uppercase;
+}
+
+.summary__title--lowercase {
+	text-transform: lowercase;
+}
+
+.summary__circle {
+	position: absolute;
+	width: 384px;
+	height: 384px;
+	border: 3px solid #1A1B1C;
+	border-radius: 100%;
+	bottom: 16px;
+	right: 16px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.summary__circle--value {
+	position: relative;
+}
+
+.summary__percentage {
+	font-size: 24px;
+	position: absolute;
+	top: 47%;
+	left: 59%;
+	transform: translate(-50%, -50%);
+}

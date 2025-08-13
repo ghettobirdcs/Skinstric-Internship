@@ -22,7 +22,8 @@
 	position: absolute;
 	top: 304px;
 	width: 100%;
-	height: 544px;
+	height: 54vh;
+	display: flex;
 }
 
 .summary__info {

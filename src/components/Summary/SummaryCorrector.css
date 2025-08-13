@@ -1,0 +1,18 @@
+.summary__corrector {
+	width: 100%;
+	max-width: 448px;
+	margin-left: 16px;
+	margin-right: 32px;
+	padding: 16px;
+	background-color: #F3F3F4;
+	border-top: 1px solid #1A1B1C;
+	display: flex;
+	justify-content: space-between;
+}
+
+.summary__para {
+	text-transform: uppercase;
+	color: #1A1B1C;
+	opacity: 80%;
+	font-weight: 500;
+}

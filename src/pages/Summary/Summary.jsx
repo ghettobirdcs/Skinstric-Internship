@@ -4,9 +4,11 @@ import "./Summary.css";
 import Button from "../../components/UI/Button";
 import Navbar from "../../components/Navbar/Navbar";
 import SummaryLeftItem from "../../components/Summary/SummaryLeftItem";
+import SummaryContent from "../../components/Summary/SummaryContent";
 
 import { useButtonHoverAnimations } from "../../hooks/useButtonHoverAnimations";
 import { useLocalStorageEstimate } from "../../hooks/useLocalStorageEstimate";
+import SummaryCorrector from "../../components/Summary/SummaryCorrector";
 
 const Summary = () => {
   const containerRef = useRef(null);
@@ -16,7 +18,20 @@ const Summary = () => {
   const age = useLocalStorageEstimate("Age");
   const gender = useLocalStorageEstimate("Gender");
 
-  const [activeIndex, setActiveIndex] = useState(1);
+  const [activeType, setActiveType] = useState("Race");
+
+  const estimatesByType = {
+    Race: race,
+    Age: age,
+    Gender: gender,
+  };
+
+  const activeEstimate = estimatesByType[activeType] || {
+    label: "",
+    value: null,
+    percentages: {},
+    error: null,
+  };
 
   const placeholder = (estimate) =>
     estimate.error ? "Unavailable" : `${estimate.label}`;
@@ -25,25 +40,33 @@ const Summary = () => {
     <div id="summary" ref={containerRef}>
       <Navbar showCode={false} demographics={true} />
       <div className="summary__container">
-        <SummaryLeftItem
-          index={1}
-          value={placeholder(race)}
-          active={activeIndex === 1}
-          setActiveIndex={setActiveIndex}
+        <div className="summary__item--container">
+          <SummaryLeftItem
+            index={1}
+            value={placeholder(race)}
+            active={activeType === "Race"}
+            setActiveType={setActiveType}
+          />
+          <SummaryLeftItem
+            index={2}
+            value={placeholder(age)}
+            active={activeType === "Age"}
+            setActiveType={setActiveType}
+          />
+          <SummaryLeftItem
+            index={3}
+            value={placeholder(gender)}
+            active={activeType === "Gender"}
+            setActiveType={setActiveType}
+          />
+        </div>
+        <SummaryContent
+          type={activeType}
+          title={activeEstimate.label}
+          value={activeEstimate.value}
         />
-        <SummaryLeftItem
-          index={2}
-          value={placeholder(age)}
-          active={activeIndex === 2}
-          setActiveIndex={setActiveIndex}
-        />
-        <SummaryLeftItem
-          index={3}
-          value={placeholder(gender)}
-          active={activeIndex === 3}
-          setActiveIndex={setActiveIndex}
-        />
-        {/* TODO: Make components for content value (mid), and corrector (right) */}
+        <SummaryCorrector />
+        {/* TODO: Make component for corrector (right) */}
         {/* TODO: Make component for 'reset' + 'confirm' btn */}
       </div>
       <p className="summary__info">

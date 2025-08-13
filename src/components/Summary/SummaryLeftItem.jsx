@@ -1,12 +1,16 @@
 import React from "react";
 import "./SummaryLeftItem.css";
 
-const SummaryLeftItem = ({ index, value, setActiveIndex, active = false }) => {
+const SummaryLeftItem = ({ index, value, setActiveType, active = false }) => {
   return (
     <div
       className={`selector ${index === 1 ? "selector__first" : index === 2 ? "selector__second" : "selector__third"} ${active && "selector--active"}`}
       onClick={() => {
-        setActiveIndex(index);
+        index === 1
+          ? setActiveType("Race")
+          : index === 2
+            ? setActiveType("Age")
+            : setActiveType("Gender");
       }}
     >
       {value}
