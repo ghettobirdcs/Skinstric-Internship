@@ -1,14 +1,14 @@
-import React, { useRef, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import "./Summary.css";
 
 import Button from "../../components/UI/Button";
 import Navbar from "../../components/Navbar/Navbar";
 import SummaryLeftItem from "../../components/Summary/SummaryLeftItem";
 import SummaryContent from "../../components/Summary/SummaryContent";
+import SummaryCorrector from "../../components/Summary/SummaryCorrector";
 
 import { useButtonHoverAnimations } from "../../hooks/useButtonHoverAnimations";
 import { useLocalStorageEstimate } from "../../hooks/useLocalStorageEstimate";
-import SummaryCorrector from "../../components/Summary/SummaryCorrector";
 
 const Summary = () => {
   const containerRef = useRef(null);
@@ -19,11 +19,31 @@ const Summary = () => {
   const gender = useLocalStorageEstimate("Gender");
 
   const [activeType, setActiveType] = useState("Race");
+  const [overrides, setOverrides] = useState({});
+
+  const applyOverride = (estimate, type) => {
+    const ov = overrides[type];
+    if (!ov) return estimate;
+    return { ...estimate, label: ov.label, value: ov.value };
+  };
+
+  const raceEffective = useMemo(
+    () => applyOverride(race, "Race"),
+    [race, overrides],
+  );
+  const ageEffective = useMemo(
+    () => applyOverride(age, "Age"),
+    [age, overrides],
+  );
+  const genderEffective = useMemo(
+    () => applyOverride(gender, "Gender"),
+    [gender, overrides],
+  );
 
   const estimatesByType = {
-    Race: race,
-    Age: age,
-    Gender: gender,
+    Race: raceEffective,
+    Age: ageEffective,
+    Gender: genderEffective,
   };
 
   const activeEstimate = estimatesByType[activeType] || {
@@ -31,6 +51,47 @@ const Summary = () => {
     value: null,
     percentages: {},
     error: null,
+  };
+
+  // NOTE: Updated demographics from user overrides
+  // const demographics = useMemo(
+  //   () => ({
+  //     Race: {
+  //       label: raceEffective.label,
+  //       value: raceEffective.value,
+  //       list: race.listItem,
+  //     },
+  //     Age: {
+  //       label: ageEffective.label,
+  //       value: ageEffective.value,
+  //       list: age.listItem,
+  //     },
+  //     Gender: {
+  //       label: genderEffective.label,
+  //       value: genderEffective.value,
+  //       list: gender.listItem,
+  //     },
+  //     overrides, // include for debugging
+  //   }),
+  //   [
+  //     raceEffective.label,
+  //     raceEffective.value,
+  //     race.listItem,
+  //     ageEffective.label,
+  //     ageEffective.value,
+  //     age.listItem,
+  //     genderEffective.label,
+  //     genderEffective.value,
+  //     gender.listItem,
+  //     overrides,
+  //   ],
+  // );
+
+  const handleCorrect = (type, newLabel, newValue) => {
+    setOverrides((prev) => ({
+      ...prev,
+      [type]: { label: newLabel, value: newValue },
+    }));
   };
 
   const placeholder = (estimate) =>
@@ -43,19 +104,19 @@ const Summary = () => {
         <div className="summary__item--container">
           <SummaryLeftItem
             index={1}
-            value={placeholder(race)}
+            value={placeholder(raceEffective)}
             active={activeType === "Race"}
             setActiveType={setActiveType}
           />
           <SummaryLeftItem
             index={2}
-            value={placeholder(age)}
+            value={placeholder(ageEffective)}
             active={activeType === "Age"}
             setActiveType={setActiveType}
           />
           <SummaryLeftItem
             index={3}
-            value={placeholder(gender)}
+            value={placeholder(genderEffective)}
             active={activeType === "Gender"}
             setActiveType={setActiveType}
           />
@@ -67,7 +128,8 @@ const Summary = () => {
         />
         <SummaryCorrector
           type={activeType}
-          listItem={activeEstimate.listItem}
+          listItem={activeEstimate.listItem || []}
+          onCorrect={handleCorrect}
         />
         {/* TODO: Make component for 'reset' + 'confirm' btn */}
       </div>

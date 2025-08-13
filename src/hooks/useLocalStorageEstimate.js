@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { getEstimate } from "../utils/getEstimate";
 
 export function useLocalStorageEstimate(key, { decimals = 2 } = {}) {
@@ -46,10 +46,8 @@ export function useLocalStorageEstimate(key, { decimals = 2 } = {}) {
     };
   }, [key, decimals]);
 
-  return {
-    label,
-    value,
-    listItem, // descending array
-    error,
-  };
+  return useMemo(
+    () => ({ label, value, listItem, error }),
+    [label, value, listItem, error],
+  );
 }

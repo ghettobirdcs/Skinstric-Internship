@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./SummaryCorrector.css";
 
 const SummaryCorrector = ({ type = "Race", listItem = [], onCorrect }) => {
@@ -8,18 +8,11 @@ const SummaryCorrector = ({ type = "Race", listItem = [], onCorrect }) => {
     setActiveLabel(listItem[0]?.label || "");
   }, [listItem]);
 
-  const updateRealValue = useCallback((categoryKey, newLabel) => {
-    console.log(
-      `[Placeholder] User selected "${newLabel}" as the corrected ${categoryKey}. Implement persistence here.`,
-    );
-  }, []);
-
   const handleSelect = (item) => {
     if (item.label === activeLabel) return;
     setActiveLabel(item.label);
-    updateRealValue(type, item.label);
     if (typeof onCorrect === "function") {
-      onCorrect(type, item.label, item.value);
+      onCorrect(type, item.label, item.value, listItem);
     }
   };
 
