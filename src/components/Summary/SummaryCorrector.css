@@ -3,7 +3,7 @@
 	max-width: 448px;
 	margin-left: 16px;
 	margin-right: 32px;
-	padding: 16px 0;
+	padding-bottom: 16px;
 	background-color: #F3F3F4;
 	border-top: 1px solid #1A1B1C;
 	display: flex;
@@ -19,7 +19,6 @@
 
 .summary__list {
 	width: 100%;
-	margin-top: 16px;
 }
 
 .summary__list--icon {
