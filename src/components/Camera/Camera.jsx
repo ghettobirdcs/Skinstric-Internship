@@ -13,6 +13,7 @@ import { useLoadingCameraAnimations } from "../../hooks/useLoadingCameraAnimatio
 import { usePhaseTwo } from "../../hooks/usePhases";
 import { toast } from "react-toastify";
 
+// TODO: Retake / use this photo option after taking screenshot
 const Camera = () => {
   const navigate = useNavigate();
 

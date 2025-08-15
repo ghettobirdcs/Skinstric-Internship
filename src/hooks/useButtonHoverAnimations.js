@@ -14,7 +14,11 @@ export const useButtonHoverAnimations = (scope) => {
         if (!container) return;
 
         const tl = gsap.timeline({ paused: true });
-        tl.to(btnSelector, { scale: 1.1, [marginProperty]: "16px" }, "<").to(
+        tl.to(
+          btnSelector,
+          { scale: 1.1, [marginProperty]: "16px", fontSize: "8px" },
+          "<",
+        ).to(
           outlineSelector,
           { border: "1px dashed #A0A4AB", outlineOffset: "5px" },
           "<",

@@ -48,7 +48,11 @@ export const useHomepageAnimations = (scope) => {
           .to(`.landing__title`, { xPercent: isLeft ? 33 : -33 }, "<")
           .to(
             `.landing__btn--${direction}`,
-            { scale: 1.1, [isLeft ? "marginRight" : "marginLeft"]: "16px" },
+            {
+              scale: 1.1,
+              [isLeft ? "marginRight" : "marginLeft"]: "16px",
+              fontSize: "8px",
+            },
             "<",
           )
           .to(
