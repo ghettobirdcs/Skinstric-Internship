@@ -6,7 +6,7 @@ import Testing from "./pages/Testing/Testing";
 import Result from "./pages/Result/Result";
 import Select from "./pages/Select/Select";
 import Summary from "./pages/Summary/Summary";
-import LoadingCamera from "./components/Camera/LoadingCamera";
+import Camera from "./components/Camera/Camera.jsx";
 
 import { ToastContainer } from "react-toastify";
 
@@ -21,8 +21,7 @@ function App() {
         <Route path="/testing" element={<Testing />} />
 
         <Route path="/result" element={<Result />} />
-        <Route path="/camera" element={<LoadingCamera />} />
-        {/* <Route path="/camera/capture" element={<Camera />} /> */}
+        <Route path="/camera" element={<Camera />} />
 
         <Route path="/select" element={<Select />} />
         <Route path="/summary" element={<Summary />} />

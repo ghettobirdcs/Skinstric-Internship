@@ -30,6 +30,7 @@ button {
 #testing .landing__left--content,
 #result .landing__left--content,
 #summary .landing__left--content,
+#camera .landing__left--content,
 #select .landing__left--content {
   position: absolute;
   bottom: 32px;
@@ -42,6 +43,7 @@ button {
 #testing .landing__right--content,
 #result .landing__right--content,
 #summary .landing__right--content,
+#camera .landing__right--content,
 #select .landing__right--content {
   position: absolute;
   bottom: 32px;
@@ -54,7 +56,7 @@ button {
 #testing .testing__box,
 #result .testing__box,
 #select .testing__box,
-#loading-camera .testing__box {
+#camera .testing__box {
   top: 50%;
   left: 50%;
 }
@@ -78,14 +80,14 @@ button {
 
 #testing .testing__box--second,
 #result .testing__box--second,
-#loading-camera .testing__box--second {
+#camera .testing__box--second {
   transform: rotate(3deg) scale(1.1);
   opacity: 0.6;
 }
 
 #testing .testing__box--third,
 #result .testing__box--third,
-#loading-camera .testing__box--third {
+#camera .testing__box--third {
   transform: rotate(7deg) scale(1.2);
   opacity: 0.3;
 }

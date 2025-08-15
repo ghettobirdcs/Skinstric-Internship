@@ -59,6 +59,7 @@
 }
 
 .landing__btn {
+	font-size: 12px;
 	position: relative;
 	padding: 8px;
 	display: flex;

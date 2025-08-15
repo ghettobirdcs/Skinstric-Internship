@@ -1,0 +1,110 @@
+#camera {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	align-items: center;
+}
+
+#camera .dotted-box__container {
+	position: absolute;
+	scale: 0.85;
+}
+
+.loading-camera__container {
+	width: 100%;
+	height: 200px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+}
+
+.loading-camera__icon {
+	position: absolute;
+	transform: scale(1.2);
+}
+
+.loading-camera__para {
+	position: absolute;
+	top: 200px;
+	text-transform: uppercase;
+	font-weight: 600;
+	font-size: 16px;
+}
+
+.loading-camera__info--container {
+	width: 100%;
+	position: absolute;
+	bottom: -250px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.loading-camera__info--title,
+.loading-camera__info {
+	text-transform: uppercase;
+	color: #1A1B1C;
+	font-size: 14px;
+	font-weight: 400;
+}
+
+.loading-camera__info--title {
+	margin-bottom: 16px;
+}
+
+.loading-camera__info--list {
+	display: flex;
+	gap: 32px;
+}
+
+.loading-camera__info {
+	display: flex;
+	gap: 8px;
+}
+
+.camera__webcam {
+	position: relative;
+}
+
+.camera--active {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+
+.capture-icon__container {
+	align-items: center;
+	gap: 16px;
+	position: absolute;
+	right: -64px;
+	top: 50%;
+	transform: translateX(-50%);
+	cursor: pointer;
+}
+
+.capture-icon__para {
+	color: #FCFCFC;
+	text-transform: uppercase;
+	opacity: 0.7;
+	font-weight: 600;
+	font-size: 14px;
+}
+
+.fill-background {
+	background-color: #1A1B1C;
+}
+
+.white-text {
+	color: #FCFCFC;
+}
+
+.invert {
+	filter: invert();
+}
+
+.active {
+	position: absolute;
+	bottom: 32px;
+}
