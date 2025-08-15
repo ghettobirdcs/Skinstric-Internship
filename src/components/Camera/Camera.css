@@ -82,6 +82,12 @@
 	top: 50%;
 	transform: translateX(-50%);
 	cursor: pointer;
+	transition: all 300ms ease;
+}
+
+.capture-icon__container:hover {
+	scale: 1.2;
+	right: -32px;
 }
 
 .capture-icon__para {

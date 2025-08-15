@@ -5,8 +5,7 @@ import "./Camera.css";
 import TestingContent from "../Testing/TestingContent";
 import TestingBoxes from "../UI/TestingBoxes";
 import CameraInfo from "./CameraInfo";
-import Webcam from "react-webcam";
-import Button from "../UI/Button";
+import ActiveCamera from "./ActiveCamera";
 
 import { useDottedBoxAnimations } from "../../hooks/useDottedBoxAnimations";
 import { useButtonHoverAnimations } from "../../hooks/useButtonHoverAnimations";
@@ -56,7 +55,6 @@ const Camera = () => {
         />
       ) : (
         <>
-          {/* TODO: Animate icon for loading state */}
           {/* LOADING STATE WHILE CAMERA IS BEING SET UP */}
           {loadingCamera && (
             <>
@@ -72,48 +70,13 @@ const Camera = () => {
             </>
           )}
 
-          <div
-            className={`camera--active ${!loadingCamera && "fill-background"}`}
-          >
-            <Webcam
-              audio={false}
-              ref={webcamRef}
-              screenshotFormat="image/jpeg"
-              videoConstraints={{ facingMode: "user" }}
-              onUserMedia={() => setLoading(false)}
-              style={{
-                display: loadingCamera ? "none" : "block",
-                width: "100%",
-                height: "100%",
-              }}
-              className="camera__webcam"
-              onUserMediaError={(e) =>
-                toast.error(`Error ${e.code}: ${e.message}`)
-              }
-            />
-
-            {/* TODO: Hover animation for capture icon */}
-            <div
-              className="capture-icon__container"
-              style={{ display: loadingCamera ? "none" : "flex" }}
-              onClick={takePicture}
-            >
-              <p className="capture-icon__para">take picture</p>
-              <img src="/capture-icon.svg" alt="" />
-            </div>
-
-            <CameraInfo
-              loading={false}
-              style={{ display: loadingCamera ? "none" : "block" }}
-            />
-            <Button
-              path="result"
-              right={false}
-              text="Back"
-              invert={true}
-              visible={!loadingCamera}
-            />
-          </div>
+          {/* CAPTURE SCREEN */}
+          <ActiveCamera
+            loadingCamera={loadingCamera}
+            takePicture={takePicture}
+            webcamRef={webcamRef}
+            setLoading={setLoading}
+          />
         </>
       )}
     </div>
