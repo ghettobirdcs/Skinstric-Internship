@@ -26,15 +26,20 @@ const Result = () => {
   useDottedBoxAnimations(containerRef);
   useButtonHoverAnimations(containerRef);
 
-  const handleImageChange = async (event) => {
+  const handleImageChange = (event) => {
     const image = event.target.files[0];
     if (!image) return;
 
-    await submitPhaseTwo(image).catch(() => {
-      toast.error("Something went wrong!");
-    });
-    localStorage.setItem("uploadedImage", image);
-    navigate("/select");
+    const reader = new FileReader();
+    reader.onloadend = async () => {
+      const base64Image = reader.result;
+      await submitPhaseTwo(base64Image).catch(() => {
+        toast.error("Something went wrong!");
+      });
+      localStorage.setItem("uploadedImage", base64Image);
+      navigate("/select");
+    };
+    reader.readAsDataURL(image);
   };
 
   return (

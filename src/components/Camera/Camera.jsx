@@ -10,6 +10,7 @@ import Button from "../UI/Button";
 
 import { useDottedBoxAnimations } from "../../hooks/useDottedBoxAnimations";
 import { useButtonHoverAnimations } from "../../hooks/useButtonHoverAnimations";
+import { useLoadingCameraAnimations } from "../../hooks/useLoadingCameraAnimations";
 import { usePhaseTwo } from "../../hooks/usePhases";
 import { toast } from "react-toastify";
 
@@ -19,7 +20,7 @@ const Camera = () => {
   const containerRef = useRef(null);
   useDottedBoxAnimations(containerRef);
   useButtonHoverAnimations(containerRef);
-  // useLoadingCameraAnimations(containerRef);
+  useLoadingCameraAnimations(containerRef);
 
   const { loading, submitPhaseTwo } = usePhaseTwo();
 
@@ -42,6 +43,8 @@ const Camera = () => {
   return (
     <div id="camera" ref={containerRef}>
       <TestingBoxes style={{ opacity: loading || loadingCamera ? "1" : "0" }} />
+
+      {/* LOADING STATE FOR AFTER CAPTURE HAS BEEN TAKEN */}
       {loading ? (
         <TestingContent
           loading={true}
@@ -54,6 +57,7 @@ const Camera = () => {
       ) : (
         <>
           {/* TODO: Animate icon for loading state */}
+          {/* LOADING STATE WHILE CAMERA IS BEING SET UP */}
           {loadingCamera && (
             <>
               <div className="loading-camera__container">
@@ -83,6 +87,9 @@ const Camera = () => {
                 height: "100%",
               }}
               className="camera__webcam"
+              onUserMediaError={(e) =>
+                toast.error(`Error ${e.code}: ${e.message}`)
+              }
             />
 
             {/* TODO: Hover animation for capture icon */}

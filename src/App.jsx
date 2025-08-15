@@ -10,6 +10,7 @@ import Camera from "./components/Camera/Camera.jsx";
 
 import { ToastContainer } from "react-toastify";
 
+// TODO: Add API logs in console
 // TODO: /testing responsiveness
 // TODO: /result responsiveness
 // TODO: /select responsiveness
