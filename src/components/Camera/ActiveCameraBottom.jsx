@@ -17,7 +17,7 @@ const ActiveCameraBottom = ({
 
       <Button
         right={false}
-        text={`${reviewMode ? "Back" : ""}`}
+        text={`${reviewMode ? "Retake" : "Back"}`}
         path={`${reviewMode ? "camera" : "result"}`}
         invert={true}
         onClick={() => {

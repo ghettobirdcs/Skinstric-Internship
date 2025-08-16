@@ -142,3 +142,36 @@
 .fade {
 	opacity: 0.3;
 }
+
+@media (max-width: 945px) {
+	#result .content__container {
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+
+	#result .content__left,
+	#result .content__right {
+		margin: 0;
+		padding: 0;
+		height: 40%;
+		width: 100%;
+		min-width: 0;
+		border: none;
+		outline: none;
+		box-shadow: none;
+	}
+
+	#result .allow-camera {
+		right: -80%;
+		top: 110%;
+	}
+}
+
+@media (max-width: 500px) {
+	#result .content__container {
+		scale: 0.8;
+	}
+}

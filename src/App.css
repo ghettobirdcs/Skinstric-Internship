@@ -91,3 +91,18 @@ button {
   transform: rotate(7deg) scale(1.2);
   opacity: 0.3;
 }
+
+
+@media (max-width: 945px) {
+  .landing__left--content {
+    left: 64px !important;
+    bottom: 64px !important;
+    scale: 1.25;
+  }
+
+  .landing__right--content {
+    right: 64px !important;
+    bottom: 64px !important;
+    scale: 1.25;
+  }
+}
