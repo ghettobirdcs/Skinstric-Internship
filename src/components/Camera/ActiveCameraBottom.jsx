@@ -17,13 +17,13 @@ const ActiveCameraBottom = ({
 
       <Button
         right={false}
-        text="Back"
-        path="camera"
+        text={`${reviewMode ? "Back" : ""}`}
+        path={`${reviewMode ? "camera" : "result"}`}
         invert={true}
         onClick={() => {
-          setReviewMode(false);
+          if (reviewMode) setReviewMode(false);
         }}
-        visible={reviewMode && !loadingCamera}
+        visible={!loadingCamera}
       />
 
       <Button
@@ -33,14 +33,6 @@ const ActiveCameraBottom = ({
         invert={true}
         visible={reviewMode && !loadingCamera}
         onClick={handleUsePhoto}
-      />
-
-      <Button
-        path="result"
-        right={false}
-        text=""
-        invert={true}
-        visible={!reviewMode && !loadingCamera}
       />
     </>
   );

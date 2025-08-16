@@ -50,6 +50,7 @@ const Summary = () => {
     error: null,
   };
 
+  // TODO: Save 'demographics' to local storage instead of separate variables so we can merge with this (the corrected demograhics)
   // NOTE: Contains both the original lists and the corrections - preserves original data
   // const demographics = useMemo(
   //   () => ({
