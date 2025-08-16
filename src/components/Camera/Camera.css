@@ -98,8 +98,16 @@
 	font-size: 14px;
 }
 
-.fill-background {
-	background-color: #1A1B1C;
+.camera__webcam--great-shot {
+	font-size: 14px;
+	font-weight: 400;
+	text-transform: uppercase;
+	position: absolute;
+	top: 200px;
+	left: 50%;
+	transform: translateX(-50%);
+	color: #FCFCFC;
+	z-index: 1;
 }
 
 .white-text {

@@ -13,7 +13,6 @@ import { useLoadingCameraAnimations } from "../../hooks/useLoadingCameraAnimatio
 import { usePhaseTwo } from "../../hooks/usePhases";
 import { toast } from "react-toastify";
 
-// TODO: Retake / use this photo option after taking screenshot
 const Camera = () => {
   const navigate = useNavigate();
 
@@ -22,22 +21,31 @@ const Camera = () => {
   useButtonHoverAnimations(containerRef);
   useLoadingCameraAnimations(containerRef);
 
-  const { loading, submitPhaseTwo } = usePhaseTwo();
-
   const webcamRef = useRef(null);
 
-  const [loadingCamera, setLoading] = useState(true);
+  const { loading, submitPhaseTwo } = usePhaseTwo();
 
-  const takePicture = async () => {
+  const [loadingCamera, setLoading] = useState(true);
+  const [capturedImage, setCapturedImage] = useState(null);
+  const [reviewMode, setReviewMode] = useState(false);
+
+  const takePicture = () => {
     if (webcamRef.current) {
       const screenshot = webcamRef.current.getScreenshot();
-      await submitPhaseTwo(screenshot).catch(() => {
-        toast.error("Something went wrong!");
-      });
 
-      localStorage.setItem("uploadedImage", screenshot);
-      navigate("/select");
+      setCapturedImage(screenshot);
+      setReviewMode(true);
     }
+  };
+
+  const handleUsePhoto = async () => {
+    if (!capturedImage) return;
+    await submitPhaseTwo(capturedImage).catch(() => {
+      toast.error("Something went wrong!");
+    });
+
+    localStorage.setItem("uploadedImage", capturedImage);
+    navigate("/select");
   };
 
   return (
@@ -75,8 +83,12 @@ const Camera = () => {
           <ActiveCamera
             loadingCamera={loadingCamera}
             takePicture={takePicture}
+            handleUsePhoto={handleUsePhoto}
             webcamRef={webcamRef}
             setLoading={setLoading}
+            reviewMode={reviewMode}
+            setReviewMode={setReviewMode}
+            capturedImage={capturedImage}
           />
         </>
       )}

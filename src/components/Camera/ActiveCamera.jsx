@@ -1,18 +1,21 @@
 import React from "react";
 import { toast } from "react-toastify";
 
-import Button from "../UI/Button";
 import Webcam from "react-webcam";
-import CameraInfo from "./CameraInfo";
+import ActiveCameraBottom from "./ActiveCameraBottom";
 
 const ActiveCamera = ({
   loadingCamera,
-  takePicture,
   webcamRef,
   setLoading,
+  takePicture,
+  handleUsePhoto,
+  reviewMode,
+  setReviewMode,
+  capturedImage,
 }) => {
   return (
-    <div className={`camera--active ${!loadingCamera && "fill-background"}`}>
+    <div className={`camera--active ${!loadingCamera}`}>
       <Webcam
         audio={false}
         ref={webcamRef}
@@ -20,9 +23,10 @@ const ActiveCamera = ({
         videoConstraints={{ facingMode: "user" }}
         onUserMedia={() => setLoading(false)}
         style={{
-          display: loadingCamera ? "none" : "block",
+          display: loadingCamera || reviewMode ? "none" : "block",
           width: "100%",
           height: "100%",
+          objectFit: "cover",
         }}
         className="camera__webcam"
         onUserMediaError={(e) => toast.error(`Error ${e.code}: ${e.message}`)}
@@ -37,16 +41,27 @@ const ActiveCamera = ({
         <img src="/capture-icon.svg" alt="" />
       </div>
 
-      <CameraInfo
-        loading={false}
-        style={{ display: loadingCamera ? "none" : "block" }}
-      />
-      <Button
-        path="result"
-        right={false}
-        text="Back"
-        invert={true}
-        visible={!loadingCamera}
+      {reviewMode && (
+        <>
+          <p className="camera__webcam--great-shot">great shot!</p>
+          <img
+            src={capturedImage}
+            alt="Your selfie"
+            className="camera__webcam"
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+            }}
+          />
+        </>
+      )}
+
+      <ActiveCameraBottom
+        handleUsePhoto={handleUsePhoto}
+        setReviewMode={setReviewMode}
+        loadingCamera={loadingCamera}
+        reviewMode={reviewMode}
       />
     </div>
   );

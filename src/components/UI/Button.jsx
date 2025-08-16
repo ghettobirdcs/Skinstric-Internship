@@ -8,12 +8,14 @@ const Button = ({
   right = true,
   visible = true,
   invert = false,
+  onClick,
 }) => {
   return (
     <Link
       to={`/${path}`}
       className={right ? "landing__right--content" : "landing__left--content"}
-      style={{ opacity: !visible && 0 }}
+      style={{ display: !visible ? "none" : "flex" }}
+      onClick={onClick}
     >
       {!right && (
         <div
