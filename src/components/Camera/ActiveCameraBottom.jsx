@@ -29,7 +29,7 @@ const ActiveCameraBottom = ({
       <Button
         right={true}
         text="Proceed"
-        path="select"
+        path="camera"
         invert={true}
         visible={reviewMode && !loadingCamera}
         onClick={handleUsePhoto}

@@ -25,14 +25,18 @@ const Camera = () => {
 
   const { loading, submitPhaseTwo } = usePhaseTwo();
 
-  const [loadingCamera, setLoading] = useState(true);
+  const [loadingCamera, setLoadingCamera] = useState(true);
   const [capturedImage, setCapturedImage] = useState(null);
   const [reviewMode, setReviewMode] = useState(false);
+
+  // This hook is used exclusively for making the 'analysis' text appear in the navbar once a photo has been taken
+  const [photoTaken, setPhotoTaken] = useState(false);
 
   const takePicture = () => {
     if (webcamRef.current) {
       const screenshot = webcamRef.current.getScreenshot();
 
+      setPhotoTaken(true);
       setCapturedImage(screenshot);
       setReviewMode(true);
     }
@@ -85,10 +89,11 @@ const Camera = () => {
             takePicture={takePicture}
             handleUsePhoto={handleUsePhoto}
             webcamRef={webcamRef}
-            setLoading={setLoading}
+            setLoading={setLoadingCamera}
             reviewMode={reviewMode}
             setReviewMode={setReviewMode}
             capturedImage={capturedImage}
+            showAnalysis={photoTaken}
           />
         </>
       )}

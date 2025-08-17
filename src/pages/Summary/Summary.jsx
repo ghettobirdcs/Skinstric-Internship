@@ -21,11 +21,14 @@ const Summary = () => {
   const ageEstimate = useLocalStorageEstimate("demographics", "Age");
   const genderEstimate = useLocalStorageEstimate("demographics", "Gender");
 
-  const estimates = {
-    Race: raceEstimate,
-    Age: ageEstimate,
-    Gender: genderEstimate,
-  };
+  const estimates = useMemo(
+    () => ({
+      Race: raceEstimate,
+      Age: ageEstimate,
+      Gender: genderEstimate,
+    }),
+    [raceEstimate, ageEstimate, genderEstimate],
+  );
 
   const [activeType, setActiveType] = useState("Race");
   const [overrides, setOverrides] = useState({});
@@ -57,7 +60,7 @@ const Summary = () => {
         };
         return acc;
       }, {}),
-    [effectiveEstimates, estimates],
+    [effectiveEstimates],
   );
 
   const handleCorrect = (type, newLabel, newValue) => {

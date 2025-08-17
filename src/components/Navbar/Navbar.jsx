@@ -7,14 +7,18 @@ const Navbar = ({
   editAnalysis = false,
   demographics = false,
   camera = false,
+  showAnalysis = false,
 }) => {
   return (
     <div className={`navbar ${camera && "navbar--camera"}`}>
       <div className="navbar__text">
         <button className="navbar__text--primary">skinstric</button>
         <img src="/bracket-left.svg" alt="" />
-        <p className="navbar__text--secondary">
-          {!camera ? "intro" : "analysis"}
+        <p
+          className="navbar__text--secondary"
+          style={{ opacity: showAnalysis || !camera ? "1" : "0" }}
+        >
+          {camera ? "analysis" : "intro"}
         </p>
         <img src="/bracket-right.svg" alt="" />
       </div>

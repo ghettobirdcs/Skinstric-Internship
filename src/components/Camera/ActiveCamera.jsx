@@ -14,10 +14,11 @@ const ActiveCamera = ({
   reviewMode,
   setReviewMode,
   capturedImage,
+  showAnalysis,
 }) => {
   return (
     <div className={`camera--active ${!loadingCamera}`}>
-      <Navbar camera={true} showCode={false} />
+      <Navbar camera={true} showCode={false} showAnalysis={showAnalysis} />
       <Webcam
         audio={false}
         ref={webcamRef}
