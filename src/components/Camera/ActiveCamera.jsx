@@ -2,6 +2,7 @@ import React from "react";
 import { toast } from "react-toastify";
 
 import Webcam from "react-webcam";
+import Navbar from "../Navbar/Navbar";
 import ActiveCameraBottom from "./ActiveCameraBottom";
 
 const ActiveCamera = ({
@@ -16,6 +17,7 @@ const ActiveCamera = ({
 }) => {
   return (
     <div className={`camera--active ${!loadingCamera}`}>
+      <Navbar camera={true} showCode={false} />
       <Webcam
         audio={false}
         ref={webcamRef}

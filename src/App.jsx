@@ -10,12 +10,7 @@ import Camera from "./components/Camera/Camera.jsx";
 
 import { ToastContainer } from "react-toastify";
 
-// TODO: Summary.jsx ln 53
-// TODO: Loading state responsiveness
 // TODO: Better image upload UI? Especially for mobile - idk how that works
-// TODO: /camera responsiveness
-// TODO: /select responsiveness
-// TODO: /summary responsiveness
 function App() {
   return (
     <>

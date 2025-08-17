@@ -9,6 +9,15 @@
 	position: fixed;
 }
 
+.navbar--camera {
+	z-index: 1;
+	filter: invert();
+}
+
+.navbar--camera .navbar__text--primary {
+	background-color: transparent;
+}
+
 .navbar__text,
 .navbar__btn {
 	text-transform: uppercase;

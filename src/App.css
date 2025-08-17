@@ -114,3 +114,68 @@ button {
     scale: 1.25;
   }
 }
+
+@media (max-width: 728px) {
+
+  #testing .testing__container,
+  #camera .testing__container {
+    transform: translate(-50%, -50%) scale(0.75);
+  }
+
+  #testing .dotted-box__container,
+  #camera .dotted-box__container {
+    transform: scale(0.75);
+  }
+
+  #camera .landing__left--content,
+  #camera .landing__right--content {
+    height: 42px;
+    top: 64px !important;
+  }
+
+  .loading-camera__info--container.active {
+    bottom: 32px;
+  }
+
+  .loading-camera__info--list {
+    text-align: center;
+    padding: 0 32px;
+  }
+
+  .capture-icon__container {
+    height: 64px;
+    left: 50%;
+    top: 80% !important;
+    justify-content: center;
+  }
+
+  #select .dotted-box__container {
+    scale: 0.9;
+  }
+
+  #select .select__content--container {
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+}
+
+@media (max-width: 560px) {
+
+  #select .dotted-box__container {
+    scale: 0.8;
+  }
+
+  #select .select__content--container {
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+
+  #testing .testing__container,
+  #camera .testing__container {
+    transform: translate(-50%, -50%) scale(0.65);
+  }
+
+  #testing .dotted-box__container,
+  #camera .dotted-box__container {
+    transform: scale(0.65);
+  }
+
+}
