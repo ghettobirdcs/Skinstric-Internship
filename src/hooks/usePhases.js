@@ -10,8 +10,13 @@ export function usePhaseOne() {
 
     try {
       // Save to localStorage
-      localStorage.setItem("Name", formData["name"]);
-      localStorage.setItem("Location", formData["location"]);
+      localStorage.setItem(
+        "userData",
+        JSON.stringify({
+          Name: formData["name"],
+          Location: formData["location"],
+        }),
+      );
 
       const response = await axios.post(
         "https://us-central1-api-skinstric-ai.cloudfunctions.net/skinstricPhaseOne",
@@ -43,9 +48,14 @@ export function usePhaseTwo() {
       );
       const result = data.data;
 
-      localStorage.setItem("Race", JSON.stringify(result.race));
-      localStorage.setItem("Age", JSON.stringify(result.age));
-      localStorage.setItem("Gender", JSON.stringify(result.gender));
+      localStorage.setItem(
+        "demographics",
+        JSON.stringify({
+          Race: result.race,
+          Age: result.age,
+          Gender: result.gender,
+        }),
+      );
 
       console.log("Phase 2 API Response:", data);
       toast.success("Image analyzed successfully!");

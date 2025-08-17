@@ -1,4 +1,4 @@
-export function getEstimate(probabilities, decimals = 0) {
+export function getEstimate(probabilities, decimals = 2) {
   const percentages = {};
   let highestLabel = null;
   let highestValue = -Infinity;

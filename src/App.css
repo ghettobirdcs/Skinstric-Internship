@@ -93,6 +93,14 @@ button {
 }
 
 
+@media (max-width: 1024px) {
+
+  #landing .landing__left--content,
+  #landing .landing__right--content {
+    display: none !important;
+  }
+}
+
 @media (max-width: 945px) {
   .landing__left--content {
     left: 64px !important;

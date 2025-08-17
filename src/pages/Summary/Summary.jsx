@@ -11,79 +11,54 @@ import SummaryButtons from "../../components/Summary/SummaryButtons";
 import { useButtonHoverAnimations } from "../../hooks/useButtonHoverAnimations";
 import { useLocalStorageEstimate } from "../../hooks/useLocalStorageEstimate";
 
+const TYPES = ["Race", "Age", "Gender"];
+
 const Summary = () => {
   const containerRef = useRef(null);
   useButtonHoverAnimations(containerRef);
 
-  const race = useLocalStorageEstimate("Race");
-  const age = useLocalStorageEstimate("Age");
-  const gender = useLocalStorageEstimate("Gender");
+  const raceEstimate = useLocalStorageEstimate("demographics", "Race");
+  const ageEstimate = useLocalStorageEstimate("demographics", "Age");
+  const genderEstimate = useLocalStorageEstimate("demographics", "Gender");
+
+  const estimates = {
+    Race: raceEstimate,
+    Age: ageEstimate,
+    Gender: genderEstimate,
+  };
 
   const [activeType, setActiveType] = useState("Race");
   const [overrides, setOverrides] = useState({});
 
-  const raceEffective = useMemo(() => {
-    const ov = overrides.Race;
-    return ov ? { ...race, label: ov.label, value: ov.value } : race;
-  }, [race, overrides]);
+  const effectiveEstimates = useMemo(
+    () =>
+      TYPES.reduce((acc, type) => {
+        const est = estimates[type];
+        const ov = overrides[type];
+        acc[type] = ov ? { ...est, label: ov.label, value: ov.value } : est;
+        return acc;
+      }, {}),
+    [estimates, overrides],
+  );
 
-  const ageEffective = useMemo(() => {
-    const ov = overrides.Age;
-    return ov ? { ...age, label: ov.label, value: ov.value } : age;
-  }, [age, overrides]);
-
-  const genderEffective = useMemo(() => {
-    const ov = overrides.Gender;
-    return ov ? { ...gender, label: ov.label, value: ov.value } : gender;
-  }, [gender, overrides]);
-
-  const estimatesByType = {
-    Race: raceEffective,
-    Age: ageEffective,
-    Gender: genderEffective,
-  };
-
-  const activeEstimate = estimatesByType[activeType] || {
+  const activeEstimate = effectiveEstimates[activeType] || {
     label: "",
     value: null,
     percentages: {},
     error: null,
   };
 
-  // TODO: Save 'demographics' to local storage instead of separate variables so we can merge with this (the corrected demograhics)
-  // NOTE: Contains both the original lists and the corrections - preserves original data
-  // const demographics = useMemo(
-  //   () => ({
-  //     Race: {
-  //       label: raceEffective.label,
-  //       value: raceEffective.value,
-  //       list: race.listItem,
-  //     },
-  //     Age: {
-  //       label: ageEffective.label,
-  //       value: ageEffective.value,
-  //       list: age.listItem,
-  //     },
-  //     Gender: {
-  //       label: genderEffective.label,
-  //       value: genderEffective.value,
-  //       list: gender.listItem,
-  //     },
-  //     overrides, // include for debugging
-  //   }),
-  //   [
-  //     raceEffective.label,
-  //     raceEffective.value,
-  //     race.listItem,
-  //     ageEffective.label,
-  //     ageEffective.value,
-  //     age.listItem,
-  //     genderEffective.label,
-  //     genderEffective.value,
-  //     gender.listItem,
-  //     overrides,
-  //   ],
-  // );
+  const corrections = useMemo(
+    () =>
+      TYPES.reduce((acc, type) => {
+        acc[type] = {
+          label: effectiveEstimates[type].label,
+          value: effectiveEstimates[type].value,
+        };
+        return acc;
+      }, {}),
+    [effectiveEstimates, estimates],
+  );
 
   const handleCorrect = (type, newLabel, newValue) => {
     setOverrides((prev) => ({
@@ -100,24 +75,15 @@ const Summary = () => {
       <Navbar showCode={false} demographics={true} />
       <div className="summary__container">
         <div className="summary__item--container">
-          <SummaryLeftItem
-            index={1}
-            value={placeholder(raceEffective)}
-            active={activeType === "Race"}
-            setActiveType={setActiveType}
-          />
-          <SummaryLeftItem
-            index={2}
-            value={placeholder(ageEffective)}
-            active={activeType === "Age"}
-            setActiveType={setActiveType}
-          />
-          <SummaryLeftItem
-            index={3}
-            value={placeholder(genderEffective)}
-            active={activeType === "Gender"}
-            setActiveType={setActiveType}
-          />
+          {TYPES.map((type, idx) => (
+            <SummaryLeftItem
+              key={type}
+              index={idx + 1}
+              value={placeholder(effectiveEstimates[type])}
+              active={activeType === type}
+              setActiveType={setActiveType}
+            />
+          ))}
         </div>
         <SummaryContent
           type={activeType}
@@ -140,7 +106,12 @@ const Summary = () => {
       </p>
 
       {/* CONFIRM AND RESET BUTTONS */}
-      <SummaryButtons resetOverrides={() => setOverrides({})} />
+      <SummaryButtons
+        confirmOverrides={() =>
+          localStorage.setItem("corrections", JSON.stringify(corrections))
+        }
+        resetOverrides={() => setOverrides({})}
+      />
     </div>
   );
 };

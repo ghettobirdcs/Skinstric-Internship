@@ -3,7 +3,7 @@ import "./SummaryButtons.css";
 
 import { Link } from "react-router-dom";
 
-const SummaryButtons = ({ resetOverrides }) => {
+const SummaryButtons = ({ resetOverrides, confirmOverrides }) => {
   return (
     <div className="summary__buttons">
       <button
@@ -12,7 +12,11 @@ const SummaryButtons = ({ resetOverrides }) => {
       >
         Reset
       </button>
-      <Link to="/" className="summary__button summary__button--confirm">
+      <Link
+        onClick={confirmOverrides}
+        to="/"
+        className="summary__button summary__button--confirm"
+      >
         Confirm
       </Link>
     </div>

@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
 import { getEstimate } from "../utils/getEstimate";
 
-export function useLocalStorageEstimate(key, { decimals = 2 } = {}) {
+export function useLocalStorageEstimate(key, subKey, { decimals = 2 } = {}) {
   const [label, setLabel] = useState("");
   const [value, setValue] = useState(null);
-  const [listItem, setListItem] = useState([]); // [{label, value}, ...] descending
+  const [listItem, setListItem] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -12,7 +12,7 @@ export function useLocalStorageEstimate(key, { decimals = 2 } = {}) {
 
     try {
       const raw = localStorage.getItem(key);
-      if (!raw) return; // nothing stored yet
+      if (!raw) return;
 
       let obj;
       try {
@@ -22,14 +22,20 @@ export function useLocalStorageEstimate(key, { decimals = 2 } = {}) {
         return;
       }
 
+      // Pick the relevant sub-object
+      const subObj = obj[subKey];
+      if (!subObj) {
+        if (!cancelled) setError(new Error(`Missing subKey: ${subKey}`));
+        return;
+      }
+
       const { percentages, highestLabel, highestValue } = getEstimate(
-        obj,
+        subObj,
         decimals,
       );
 
       if (cancelled) return;
 
-      // Build descending array
       const sorted = Object.entries(percentages || {})
         .sort((a, b) => b[1] - a[1])
         .map(([lbl, val]) => ({ label: lbl, value: val }));
@@ -44,7 +50,7 @@ export function useLocalStorageEstimate(key, { decimals = 2 } = {}) {
     return () => {
       cancelled = true;
     };
-  }, [key, decimals]);
+  }, [key, subKey, decimals]);
 
   return useMemo(
     () => ({ label, value, listItem, error }),
