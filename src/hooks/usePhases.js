@@ -19,7 +19,7 @@ export function usePhaseOne() {
       );
 
       const response = await axios.post(
-        "https://us-central1-api-skinstric-ai.cloudfunctions.net/skinstricPhaseOne",
+        process.env.REACT_APP_PHASE_ONE_API_URL,
         formData,
       );
 
@@ -43,8 +43,10 @@ export function usePhaseTwo() {
 
     try {
       const { data } = await axios.post(
-        "https://us-central1-api-skinstric-ai.cloudfunctions.net/skinstricPhaseTwo",
-        { image: base64Image },
+        process.env.REACT_APP_PHASE_TWO_API_URL,
+        {
+          image: base64Image,
+        },
       );
       const result = data.data;
 
