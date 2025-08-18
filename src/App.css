@@ -159,6 +159,13 @@ button {
 }
 
 @media (max-width: 560px) {
+  #landing .dotted-box {
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+
+  .dotted-box__container {
+    scale: 0.8;
+  }
 
   #select .dotted-box__container {
     scale: 0.8;

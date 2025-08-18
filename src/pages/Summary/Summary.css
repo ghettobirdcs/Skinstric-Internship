@@ -43,11 +43,13 @@
 		overflow-y: visible !important;
 	}
 
-	#camera {
+	#camera,
+	#result,
+	#select {
 		max-height: 100vh;
 		position: fixed;
 		inset: 0;
-		overflow-y: hidden;
+		overflow: hidden;
 	}
 
 	#summary .landing__left--content {
