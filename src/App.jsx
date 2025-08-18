@@ -10,7 +10,6 @@ import Camera from "./components/Camera/Camera.jsx";
 
 import { ToastContainer } from "react-toastify";
 
-// TODO: Better image upload UI? Especially for mobile - idk how that works
 function App() {
   return (
     <>
