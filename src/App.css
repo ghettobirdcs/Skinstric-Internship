@@ -179,10 +179,4 @@ button {
   #camera .testing__container {
     transform: translate(-50%, -50%) scale(0.65);
   }
-
-  #testing .dotted-box__container,
-  #camera .dotted-box__container {
-    transform: scale(0.65);
-  }
-
 }
