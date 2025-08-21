@@ -12,8 +12,4 @@ Notes:
 - The AI piece is still in progress. Results are fake data.
 - Errors are mostly generic toasts right now.
 
-Tech used: React, plain CSS, axios, react-webcam, react-toastify.
-
-This is just an internship prototype, so there are things to improve (validation, accessibility, tests, etc.).
-
-Thanks for looking :D
+Tech used: React, plain CSS, GSAP, axios, react-webcam, react-toastify
